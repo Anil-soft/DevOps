@@ -32,4 +32,84 @@
  cut -d ':' -f 1 /etc/passwd  => print first field {field separator -d with :}
  cut -d ' ' -sf 1 file.txt  => to print the first field space separator 
  
+ {echo}
+ ex:-
+#!/bin/bash
+a="anil kumar"
+echo "my name is $a"
+echo "$a has done DevOps course"
+echo "this is $a from Anantapur"
+
+v=$(httpd -v)   => assgning httpd -v output into the variable v
+eccho $v
+
+ex:- to find out the versions
+!/bin/bash
+httpd_version=$(httpd -v | awk -F '[ /]' '/version/ {print $4}')
+docker_version=$(docker -v | awk '/version/ {print $3}' | tr -d ",")
+docker_status=$(systemctl status docker | awk '/active/ {print $3}' | tr -d "[()}")
+echo "The httpd version is: $httpd_version"
+echo "The docker version is: $docker_version"
+echo "Docker status is: $docker_status"
+
+ex:- printing multiple lines
+#!/bin/bash
+cat << EOF
+the user is: $USER
+the home for this $USER is: $HOME
+EOF
+
+ex:-2
+#!/bin/bash
+cat << EOF > output.txt
+the user is: $USER
+the home for this $USER is: $HOME
+EOF
+
+tr [a-z] [A-Z] <<<"this is anil"    => convert from small to capital letters
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
  

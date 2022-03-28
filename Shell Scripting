@@ -3,7 +3,7 @@
   java -version 1>jav_ver.txt 2>&1  => store error also where 1 is storing
   &>file_name => both succ and err stored into single file
   awk 'NR>=6 && NR<=12 {print}' file.txt  => to print the lines between the range
-  send -n '2,12p' file.txt  => print between the range
+  sed -n '2,12p' file.txt  => print between the range
   
  {grep}
  grep bash file.txt  => search word in single file
@@ -31,6 +31,7 @@
  cut -f 1,3 file.txt  => to print the range from 1 to 3 {-f is field separator}
  cut -d ':' -f 1 /etc/passwd  => print first field {field separator -d with :}
  cut -d ' ' -sf 1 file.txt  => to print the first field space separator 
+ httpd -v | grep -E "version" | cut -d '/' -f 2 | cut -d ' ' -f 1
  
  {echo}
  ex:-
@@ -56,14 +57,14 @@ ex:- printing multiple lines
 #!/bin/bash
 cat << EOF
 the user is: $USER
-the home for this $USER is: $HOME
+home for this $USER is: $HOME
 EOF
 
 ex:-2
 #!/bin/bash
 cat << EOF > output.txt
 the user is: $USER
-the home for this $USER is: $HOME
+home for this $USER is: $HOME
 EOF
 
 tr [a-z] [A-Z] <<<"this is anil"    => convert from small to capital letters

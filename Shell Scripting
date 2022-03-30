@@ -69,6 +69,62 @@ EOF
 
 tr [a-z] [A-Z] <<<"this is anil"    => convert from small to capital letters
 
+{comments}
+<< COMMENT   {for multiple lines}
+====================
+====================
+====================
+COMMENT
+
+# {for the single line}
+: '
+=========================
+=========================
+=========================
+'
+{set}
+set -n    => syntax check
+set -x    => print the command before executing it in script
+set -e    => exit script if any command fails
+
+echo $?   => if previous command executed then it gives '0' as a result.
+
+#   => to print the length of the variable
+ex:- echo "${#a}"
+
+ex:-
+a="anil kumar"
+echo $a | sed 's/anil/ani/' | tr [a-z] [A-z]
+
+{slicing}
+a="anil kumar"
+echo "${a:1"}"
+echo "${a:0:5}"
+
+{input}
+ex:-1
+#!/bin/bash
+read a
+read b
+echo a value is : $a | tr [a-z] [A-Z]
+echo b value is : $b | tr [a-z] [A-Z]
+
+ex:-2
+#!/bin/bash
+read -p "enter the first name: " a
+read -p "enter the second name: " b
+echo a value is : $a | tr [a-z] [A-Z]
+echo b value is : $b | tr [a-z] [A-Z]
+
+
+
+
+
+
+
+
+
+
 
 
 

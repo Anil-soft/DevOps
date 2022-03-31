@@ -149,7 +149,28 @@ echo "$((a%b))"
 echo "$((a++))"
 echo "$((y--))"
 
+ex:- 2
+#!/bin/bash
+read -p "Enter the First value: " a
+read -p "Enter the Second value: " b
+sum="$((a+b))"
+echo "$sum"
+min="$((a-b))"
+echo "$min"
+div="$((a/b))"
+echo "$div"
+rem="$((a%b))"
+echo "$rem"
 
+ex:- 3
+#!/bin/bash
+read -p "Enter the First value: " a
+read -p "Enter the Second value: " b
+
+div=$(bc<<<"scale=2;$a/$b")
+rem="$(($a%$b))"
+echo "The div of $a and $b is: $div"
+echo "The rem of $a and $b is: $rem"
 
 
 

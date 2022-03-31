@@ -172,6 +172,78 @@ rem="$(($a%$b))"
 echo "The div of $a and $b is: $div"
 echo "The rem of $a and $b is: $rem"
 
+{case}
+ex:- 1
+#!/bin/bash
+read -p "Enter any value: " opt
+case $opt in
+[0-9])
+echo "You entered numeric value"
+;;
+[a-z])
+echo "You entered lower case letter"
+;;
+[A-Z])
+echo "You entered capital letter"
+;;
+*)
+echo "You entered invalid value"
+;;
+esac
+
+ex:- 2
+#!/bin/bash
+read -p "Enter the first value: " a
+read -p "Enter the second value: " b
+read -p "Enter the required option: " opt
+
+case $opt in
+1)
+echo "You selected the addition"
+echo "The addition of $a and $b is: $((a+b))"
+;;
+2)
+echo "You selected the subtraction"
+echo "The subtraction of $a and $b is: $((a-b))"
+;;
+3)
+echo "You selected the multiplication"
+echo "The multiplication of $a and $b is: $((a*b))"
+;;
+*)
+echo "You entered invalid value"
+esac
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

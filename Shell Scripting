@@ -214,6 +214,88 @@ echo "The multiplication of $a and $b is: $((a*b))"
 echo "You entered invalid value"
 esac
 
+{comparison operators}
+[[ int1 -eq int2 ]]
+-ne, -lt, -le, -gt, -ge, -eq
+
+strings:- 
+[[ -z str ]]
+[[ -n str ]]
+[[ str1 == str2 ]]
+[[ str1 != str2 ]]
+
+{command chaining operators}
+cmd1 ; cmd2   => run cmd1 and then cmd2, regardless of the success of failure of cmd1
+cmd1 && cmd2    => run cmd2 only if cmd1 is succeeded
+cmd1 || cmd2    => run cmd2 if the cmd1 is failed
+
+ex:- 
+#!/bin/bash
+which httpd && { echo "httpd is installed" ; echo "httpd version is: $(httpd -v)" ; } || echo "httpd is not installed"
+
+{if statement}
+ex:- 1
+#!/bin/bash
+if which httpd
+then
+echo "httpd is install"
+echo "the version of httpd is: $(docker -v)"
+fi
+
+ex:-2
+#!/bin/bash
+which httpd
+if [[ $? -eq 0 ]]
+then
+echo "httpd is install"
+echo "the version of httpd is: $(docker -v)"
+fi
+
+ex:-3
+#!/bin/bash
+which httpd 2>&1 1>/dev/null
+if [[ $? -eq 0 ]]
+then
+echo "httpd is install"
+echo "the version of httpd is: $(docker -v)"
+fi
+
+{if-else}
+ex:- 1
+#!/bin/bash
+if which docker
+then
+echo "docker is installed"
+echo "docker version is: $(docker -v)"
+else
+echo "docker is not installed"
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

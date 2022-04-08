@@ -271,6 +271,115 @@ else
 echo "docker is not installed"
 fi
 
+{user is root or not}
+ex:- 1
+[[ $(id -u) -eq 0 ]] && echo "you are root" || echo "you are not root"
+
+{sudo previliges}
+ex:- 2
+sudo -v 1>/dev/null 2>&1 && echo "the user $(id -un) is having sudo previliges || echo "the user is $(id -un) is not having sudo previliges
+
+{root user can start docker service}
+ex:- 1
+#!/bin/bash
+if [[ $(id -u) -eq 0 ]]
+then
+   if service docker status 1>/dev/null 2>&1
+   then
+      echo "Docker is already up and running"
+   else
+      echo "getting started docker service"
+      service docker start
+   fi
+else
+   if sudo -v 1>/dev/null 2>&1
+   then
+      if service docker status 1>/dev/null 2>&1
+      then
+         echo "Docker is already up and running"
+      else
+         echo "getting started docker service"
+         service docker start
+      fi
+   else
+      echo "sorry you are no allowed to start docker service since you are not having sudo previliges"
+   fi
+fi
+
+{logical operators}
+&&
+ex:- 1
+||
+#!/bin/bash
+read -p "enter the confirmation to start docker: (yes or no)" conf
+if [[ $conf == "yes" || $conf == "y" ]]
+then
+   echo "starting docker service"
+   service docker start
+else
+   echo "skipping...."
+fi
+
+&&
+ex:- 1
+#!/bin/bash
+read -p "enter your number: " num
+if [[ $num -ge 50 && $num -le 75 ]]
+then
+   echo "$num is in the range of 50 to 75"
+else
+   echo "$num is not in the range of 50 to 75"
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

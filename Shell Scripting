@@ -312,7 +312,7 @@ ex:- 1
 ||
 #!/bin/bash
 read -p "enter the confirmation to start docker: (yes or no)" conf
-if [[ $conf == "yes" || $conf == "y" ]]
+if [[ $conf == "yes" || $conf == "y" ]] or { if [[ $conf =~ yes|y ]] }
 then
    echo "starting docker service"
    service docker start
@@ -330,6 +330,35 @@ then
 else
    echo "$num is not in the range of 50 to 75"
 fi
+
+{elif condition}
+ex:- 1
+#!/bin/bash
+if [[ $(id -u) -ne 0 ]]
+then
+   echo "you are not allowed to start docker services"
+   exit 1
+fi
+read -p "Enter your option here: " opt
+if [[ $opt == start ]]
+then
+   echo "starting the docker service"
+   service docker start
+elif [[ $opt  == stop ]]
+then
+   echo "stopping the docker service"
+   service docker stop
+elif [[ $opt == status ]]
+then
+   service docker status
+else
+   echo "you entered invalid option!"
+fi
+
+{crontab]
+* use crontab -e to schedule a job
+* use crontab -l to list the jobs
+* use crontab -r to remove jobs
 
 
 

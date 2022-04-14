@@ -91,12 +91,39 @@ resource "google_compute_instance" "another_instance" {
     }
   }
 }
+ /* terraform import */
+- Identify the existing infrastructure to be imported.
+- Import the infrastructure into your Terraform state.
+- Write a Terraform configuration that matches that infrastructure.
+- Review the Terraform plan to ensure that the configuration matches the expected state and infrastructure.
+- Apply the configuration to update your Terraform state.
+
+/* terraform backend */
+provider "google" {
+  project     = "# REPLACE WITH YOUR PROJECT ID"
+  region      = "us-central-1"
+}
+resource "google_storage_bucket" "test-bucket-for-state" {
+  name        = "# REPLACE WITH YOUR PROJECT ID"
+  location    = "US"
+  uniform_bucket_level_access = true
+}
 
 
+terraform {
+  backend "local" {
+    path = "terraform/state/terraform.tfstate"
+  }
+}
 
+terraform {
+  backend "gcs" {
+    bucket  = "# REPLACE WITH YOUR BUCKET NAME"
+    prefix  = "terraform/state"
+  }
+}
 
-
-
+terraform init -migrate-state {migrate the terraform state from local to gcs}
 
 
 

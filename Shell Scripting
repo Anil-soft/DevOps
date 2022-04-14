@@ -356,10 +356,18 @@ else
 fi
 
 {crontab]
+minute  hour  day  month  weekday  command/script
 * use crontab -e to schedule a job
 * use crontab -l to list the jobs
 * use crontab -r to remove jobs
 
+0 */2 * * *   ==> every 2 hours job gets executed 
+
+@yearly   ==> run the job yearly
+@monthly  ==> run the job monthly
+@daily    ==> run the job daily
+@hourly   ==> run the job hourly
+@reboot   ==> if useful for those tasks which you want to run on your system startup.
 
 
 

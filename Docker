@@ -1,0 +1,18 @@
+-: docker pull centos   => to pull the image
+-: docker run -it --name <container-name> centos /bin/bash  => to create the container from centos image
+-: docker ps  => to list the active containers
+-: docker ps -a  => to list the active and passive containers
+-: docker restart <container-id/name>  => to restart the container
+-: docker exec -it <container-id> /bin/bash  => to log in to the container
+-: docker commit <container-id> "<image-name>"  => to create and image form container
+-: docker build -f "<image-name>" .  => to create an image from dockerfile
+Dockerfile:-
+FROM centos
+RUN yum install telnet -y && useradd anil  => to run the command inside the container
+ENV MYCOURSE=DevOps  => to export the env variables
+ADD mytarfile.tar /root/  => untar and copy the file
+COPY mytarfile.tr /root/ => only copy the file
+USER anil  => run an mage with the user anil
+EXPOSE 80  => to expose the container on port 80 
+WORKDIR /root/mydir  => to specify the working dir in container
+

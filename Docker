@@ -15,4 +15,43 @@ COPY mytarfile.tr /root/ => only copy the file
 USER anil  => run an mage with the user anil
 EXPOSE 80  => to expose the container on port 80 
 WORKDIR /root/mydir  => to specify the working dir in container
+ENTRYPOINT ["/bin/bash", "/tmp/script1.sh"]  
+CMD ["/bin/bash", "/tmp/script1.sh"]
+-: CMD & ENTRYPOINT { "specifies the instruction that is to be executed when a Docker container starts. 
+This CMD command is not really necessary for the container to work, 
+as the echo command can be called in a RUN statement as well. 
+The main purpose of the CMD command is to launch the software required in a container." }
+-: ENTRYPOINT can not change execution of container
 
+-: docker run mydockerfile:cmd /bin/bash /tmp/script1.sh
+-: docker run mydockerfile:entrypoint /bin/bash /tmp/script1.sh
+
+{ docker volumes }
+ - vgcreate myvg /dev/xvdf
+ - lvcreate -L +4G -n mylv myvg
+ - mkfs.ext4 /dev/myvg/mylv
+ - mount -t ext4 /dev/myvg/mylv/ /mydocdata/
+ -: docker run -it --name <container-name> -v /mydocdata/:/myapp centos /bin/bash  => to attach volume to the container
+ -: man docker-run  => manual page to refer some options
+ -: docker network create --driver=bridge --subnet=10.1.0.0/16 --ip-range=10.1.4.0/24 --gateway=10.1.0.1 anil-network  => to create the network
+ { docker network type }
+ -  bridge
+ -  host
+ -  none
+ 
+ -: docker run -itd --name network1 --net  <network-name> centos /bin/bash  => to create the container with the specified network
+ -: docker run -itd --name network1 --net  <network-name> --ip <ip-addr> centos /bin/bash  ==> to create the container with the specified IP\
+ -: docker logs mycont1  => to check the container logs
+ -: docker stats  => to check the memory and CPU utilization of container
+ -: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

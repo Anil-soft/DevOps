@@ -56,7 +56,17 @@ The main purpose of the CMD command is to launch the software required in a cont
     - docker save -o myimage.tar centos  => save the image in the form of tar file
     - docker load -i myimage.tar  => load the image through tar file
  
- -: docker tag 
+ -: docker tag centos:7 anil3078/centos:7  => to tag the docker image, its like a alias to the image
+ -  How to pull docker image from private registery?
+    - log in the docker hub
+    - docker pull <image-name>
+ -  How to push image to the private repository?
+    - need to add the collaborators(user id) in collaborators section
+    - images can be shared accross collaborators
+    - first need to tag the image before push into the repo
+    -: docker tag centos:7 anil3078/centos:7
+    -  docker push <image-name> 
+    
  
  
  

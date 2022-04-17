@@ -43,7 +43,24 @@ The main purpose of the CMD command is to launch the software required in a cont
  -: docker run -itd --name network1 --net  <network-name> --ip <ip-addr> centos /bin/bash  ==> to create the container with the specified IP\
  -: docker logs mycont1  => to check the container logs
  -: docker stats  => to check the memory and CPU utilization of container
- -: 
+ -: docker ps -q  => to list out the container id's
+ -: docker rm -f <container-name>  => to remove container
+ -: docker rm -f$(docker ps -q)  => to delete all the containers
+ 
+ <== script to delete the docker images ==>
+ for image in $(docker images|grep -v -e "centos\|REPOSITORY"|awk '{print $3}')
+ do ocker rmi -f $image
+ done
+ 
+  - How to take up the backup of docker image?
+    - docker save -o myimage.tar centos  => save the image in the form of tar file
+    - docker load -i myimage.tar  => load the image through tar file
+ 
+ -: docker tag 
+ 
+ 
+ 
+
  
  
  

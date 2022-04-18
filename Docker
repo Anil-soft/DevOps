@@ -66,6 +66,11 @@ The main purpose of the CMD command is to launch the software required in a cont
     - first need to tag the image before push into the repo
     -: docker tag centos:7 anil3078/centos:7
     -  docker push <image-name> 
+ 
+ -: docker run -d -p 8080:80 --name httpd-container httpd  => mapping the port to the container, 8080 is the host machine and 80 is the container por,
+      container port is used only to communicate internally
+      
+ -: 
     
  
  

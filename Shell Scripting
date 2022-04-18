@@ -369,6 +369,20 @@ minute  hour  day  month  weekday  command/script
 @hourly   ==> run the job hourly
 @reboot   ==> if useful for those tasks which you want to run on your system startup.
 
+{ example to get an email alert regarding RAM size }
+ex:- 1
+#!/bin/bash
+TO="anilkumar.anwi@gmail.com"
+TH_L=400
+free_RAM=$(free -mt | grep -E "Total" | awk '{print $4}')
+if [[ $free_RAM -lt $TH_L ]]
+then
+  echo -e "service is running with low RAM size\nAvailable RAM size is: $free_RAM" | mail -s "RAM INFOR" $TO
+fi
+
+* * * * * /bin/bash /root/mail_alert.sh  ==> to schedule the job
+
+
 
 
 

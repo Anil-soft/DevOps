@@ -382,6 +382,16 @@ fi
 
 * * * * * /bin/bash /root/mail_alert.sh  ==> to schedule the job
 
+{ mail alert regarding filesystme usage }
+ex:- 1
+#!/bin/bash
+emailID="anilkumar.anwi@gmail.com"
+FU=$(df -H | grep /dev/xvda/ | awk '{ print $5 }' | tr -d "%")
+if [[ $FU -gt 80 ]]
+then
+  echo "the filesystem usage is: $FU" | /usr/bin/mail -s "Filesystem utilization aler" "$emailID"
+fi
+
 
 
 

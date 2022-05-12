@@ -1,0 +1,104 @@
+<== IAM ==>
+  :- IAM = Identity and Access Management, Global service
+  :- Users are people within your organization, and can be grouped
+  :- Groups only contain users, not other groups
+  :- Users don’t have to belong to a group, and user can belong to multiple groups
+  :- Users or Groups can be assigned JSON documents called policies
+  :- These policies before the permissions of the users
+  what's the AWS CLI?
+    A tool that enables you to interact with AWS services using commands in your command-line shell
+    IAM Roles for Services
+  :- Some AWS service will need to perform actions on your behalf
+  :- To do so, we will assign permissions to AWS services with IAM Roles
+  :- Common roles: • EC2 Instance Roles • Lambda Function Roles • Roles for CloudFormation
+  
+<== EC2 ==>
+  Compute Optimized
+  :- Batch processing Workloads
+  :- High performance web servers
+  :- High performance computing
+  Memory Optimized
+  :- Applications performing real-time processing of big unstructured data
+  :- High performance, relational/non-relational databases
+  Storage Optimized
+  :- High frequency online transaction processing (OLTP) systems
+  :- Data warehousing applications
+  
+<== Security Groups ==>
+  :- Security Groups are the fundamental of network security in AWS
+  :- They control how traffic is allowed into or out of our EC2 Instances
+  :- Security Groups are statuful 
+  :- It simply means if you allow say outbound rule on particular port protocol ip address it will allow to get back. So whatever coms in comes out.
+  :- Security groups only contain rule
+  :- Can be attached to multiple instances
+  :- All inbound traffic is blocked by default
+  :- All outbound traffic is authorised by default
+  
+<== Classic Ports to know ==>
+:- 22 = SSH (Secure Shell) - log into a Linux instance
+:- 21 = FTP (File Transfer Protocol) – upload files into a file share
+:- 22 = SFTP (Secure File Transfer Protocol) – upload files using SSH
+:- 80 = HTTP – access unsecured websites
+:- 443 = HTTPS – access secured websites
+:- 3389 = RDP (Remote Desktop Protocol) – log into a Windows instance
+
+EC2 Instances purchase options
+On Demand 
+  :- Recommended for short-term and un-interrupted workloads, where you can't predict how the application will behave
+  :- Has the highest cost but no upfront payment
+  :- No long-term commitment
+EC2 Reserved Instances
+  :- Up to 72% discount compared to On-demand
+  :- long workloads with flexible instances
+  :- Recommended for steady-state usage applications
+EC2 Spot Instances
+  :- Can get a discount of up to 90% compared to On-demand
+  :- Instances that you can “lose” at any point of time if your max price is less than the current spot price
+  :- Image processing
+  :- Workloads with a flexible start and end time
+EC2 Dedicated Hosts
+  :- Workloads with a flexible start and end time
+  :- Instances run on hardware that’s dedicated to you
+  :- May share hardware with other instances in same account
+  :- No control over instance placement (can move hardware after Stop / Start)
+
+Which purchasing option is right for me?
+• On demand: coming and staying in resort whenever we like, we pay the full price
+• Reserved: like planning ahead and if we plan to stay for a long time, we may get a good discount.
+• Savings Plans: pay a certain amount per hour for certain period and stay in any room type (e.g., 
+  King, Suite, Sea View, …)
+• Spot instances: the hotel allows people to bid for the empty rooms and the highest bidder keeps the 
+  rooms. You can get kicked out at any time
+• Dedicated Hosts: We book an entire building of the resort
+• Capacity Reservations: you book a room for a period with full price even you don’t stay in it
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

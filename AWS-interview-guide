@@ -63,14 +63,14 @@ EC2 Dedicated Hosts
   :- No control over instance placement (can move hardware after Stop / Start)
 
 Which purchasing option is right for me?
-• On demand: coming and staying in resort whenever we like, we pay the full price
-• Reserved: like planning ahead and if we plan to stay for a long time, we may get a good discount.
-• Savings Plans: pay a certain amount per hour for certain period and stay in any room type (e.g., 
-  King, Suite, Sea View, …)
-• Spot instances: the hotel allows people to bid for the empty rooms and the highest bidder keeps the 
-  rooms. You can get kicked out at any time
-• Dedicated Hosts: We book an entire building of the resort
-• Capacity Reservations: you book a room for a period with full price even you don’t stay in it
+  • On demand: coming and staying in resort whenever we like, we pay the full price
+  • Reserved: like planning ahead and if we plan to stay for a long time, we may get a good discount.
+  • Savings Plans: pay a certain amount per hour for certain period and stay in any room type (e.g., 
+    King, Suite, Sea View, …)
+  • Spot instances: the hotel allows people to bid for the empty rooms and the highest bidder keeps the 
+    rooms. You can get kicked out at any time
+  • Dedicated Hosts: We book an entire building of the resort
+  • Capacity Reservations: you book a room for a period with full price even you don’t stay in it
 
 <== Elastic IPs ==>
 :- When you stop and then start an EC2 instance, it can change its public IP
@@ -199,7 +199,46 @@ Encryption: encrypt an unencrypted EBS volume
   • Supports multiple listeners with multiple SSL certificates
   • Uses Server Name Indication (SNI) to make it work
 
-    
+<== Auto Scaling ==>
+:- Scale out (add EC2 instances) to match an increased load
+:- Scale in (remove EC2 instances) to match a decreased load
+:- Ensure we have a minimum and a maximum number of machines running
+:- Automatically Register new instances to a load balancer
+
+• A launch configuration 
+  • AMI + Instance Type 
+  • EC2 User Data 
+  • EBS Volumes 
+  • Security Groups 
+  • SSH Key Pair 
+  • Min Size / Max Size / Initial Capacity 
+  • Network + Subnets Information 
+  • Load Balancer Information 
+  • Scaling Policies
+  
+<== Auto Scaling Alarms ==>
+:- It is possible to scale an ASG based on CloudWatch alarms
+:- An Alarm monitors a metric (such as Average CPU)
+• Based on the alarm:
+  • We can create scale-out policies (increase the number of instances)
+  • We can create scale-in policies (decrease the number of instances)
+:- After a scaling activity happens, you are in the cooldown period (default 300 seconds)
+:- During the cooldown period, the ASG will not launch or terminate additional instances (to allow for metrics to stabilize)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     
     

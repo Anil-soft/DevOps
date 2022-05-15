@@ -41,6 +41,12 @@
 :- 80 = HTTP – access unsecured websites
 :- 443 = HTTPS – access secured websites
 :- 3389 = RDP (Remote Desktop Protocol) – log into a Windows instance
+:- PostgreSQL: 5432
+:- MySQL: 3306
+:- Oracle RDS: 1521
+:- MSSQL Server: 1433
+:- MariaDB: 3306 (same as MySQL)
+:- Aurora: 5432 (if PostgreSQL compatible) or 3306 (if MySQL compatible)
 
 EC2 Instances purchase options
 On Demand 
@@ -192,9 +198,11 @@ Encryption: encrypt an unencrypted EBS volume
 :- The load balancer uses an X.509 certificate (SSL/TLS server certificate)
 :- You can manage certificates using ACM (AWS Certificate Manager)
 :- Server Name Indication solves the problem of loading multiple SSL certificates onto one web server (to serve multiple websites)
+
 • Application Load Balancer (v2)
   • Supports multiple listeners with multiple SSL certificates
   • Uses Server Name Indication (SNI) to make it work
+  
 • Network Load Balancer (v2)
   • Supports multiple listeners with multiple SSL certificates
   • Uses Server Name Indication (SNI) to make it work
@@ -225,18 +233,114 @@ Encryption: encrypt an unencrypted EBS volume
 :- After a scaling activity happens, you are in the cooldown period (default 300 seconds)
 :- During the cooldown period, the ASG will not launch or terminate additional instances (to allow for metrics to stabilize)
 
+<== RDS ==>
+• AWS RDS Overview
+  :- RDS stands for Relational Database Service
+  :- It’s a managed DB service for DB use SQL as a query language
+  :- Automated provisioning, OS patching
+  :- Continuous backups and restore to specific timestamp (Point in Time Restore)!
+  :- Read replicas for improved read performance
+  :- Multi AZ setup for DR (Disaster Recovery)
+  :- Scaling capability (vertical and horizontal)
+  :- Backups are automatically enabled in RDS
+  :- Helps you increase storage on your RDS DB instance dynamically
+  :- When RDS detects you are running out of free database storage, it scales automatically
+  :- Read replicas are used for SELECT (=read) only kind of statements (not INSERT, UPDATE, DELETE)
+  :- Possibility to encrypt the master & read replicas with AWS KMS - AES-256 encryption
+  :- Encryption has to be defined at launch time
+  :- Aurora can have 15 replicas while MySQL has 5, and the replication process is faster (sub 10 ms replica lag)
+  
+  <== Route53 ==>
+  :- Why Route 53? 53 is a reference to the traditional DNS port
+  :- Route 53 is also a Domain Registrar
+  :- Domain Name System which translates the human friendly hostnames into the machine IP addresses (www.google.com => 172.217.18.36)
+  • Route 53 – Record Types
+    • A – maps a hostname to IPv4
+    • AAAA – maps a hostname to IPv6
+    • CNAME – maps a hostname to another hostname
+    • NS – Name Servers for the Hosted Zone
+    • Control how traffic is routed for a domain
+• CNAME
+  • Points a hostname to any other hostname. (app.mydomain.com => blabla.anything.com)
+• Alias 
+  • Points a hostname to an AWS Resource (app.mydomain.com => blabla.amazonaws.com)
+  
+• Routing Policies – Geolocation
+  • Different from Latency-based!
+  • This routing is based on user location
+  
+• Routing Policies – Geoproximity
+  • Route traffic to your resources based on the geographic location of users and resources
+  • Ability to shift more traffic to resources based on the defined bias
+  
+• Routing Policies – Simple
+  • Typically, route traffic to a single resource
+  • Can specify multiple values in the same record
+  • If multiple values are returned, a random one is chosen by the client
+  
+• Routing Policies – Weighted
+  • Assign a weight of 0 to a record to stop sending traffic to a resource
+  • If all records have weight of 0, then all records will be returned equally
+  
+Routing Policies – Latency-based
+  • Redirect to the resource that has the least latency close to us
+  • Super helpful when latency for users is a priority 
+  • Latency is based on traffic between users and AWS Regions  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 
 
-
-
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
     

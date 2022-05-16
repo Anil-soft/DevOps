@@ -287,6 +287,21 @@ Routing Policies – Latency-based
   • Super helpful when latency for users is a priority 
   • Latency is based on traffic between users and AWS Regions  
   
+<== Amazon S3 Overview - Buckets ==>
+:- Amazon S3 allows people to store objects (files) in “buckets” (directories)
+:- Buckets are defined at the region level
+:- Max Object Size is 5TB (5000GB)
+:- If uploading more than 5GB, must use “multi-part upload”
+• Amazon S3 -Versioning
+  • It is enabled at the bucket leve
+  • Any file that is not versioned prior to enabling versioning will have version “null”
+  • Suspending versioning does not delete the previous versions
+• S3 Encryption for Objects
+  • SSE-S3: encrypts S3 objects using keys handled & managed by AWS
+  • SSE-KMS: leverage AWS Key Management Service to manage encryption keys
+  • SSE-C: when you want to manage your own encryption keys
+  • Client Side Encryption 
+
 
   
   

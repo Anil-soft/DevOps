@@ -318,6 +318,12 @@ Routing Policies – Latency-based
   • Amazon S3 Glacier Deep Archive
   • Amazon S3 Intelligent Tiering
   
+• S3 Versioning
+  :- click on the bucket -> properties -> bucket versioning enable -> enable versioning
+• Encrypton
+  :- click on the object -> server-side encryption settings -> select the encryption type
+  
+  
   
   
   

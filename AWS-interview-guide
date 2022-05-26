@@ -322,12 +322,10 @@ Routing Policies – Latency-based
   :- click on the bucket -> properties -> bucket versioning enable -> enable versioning
 • Encrypton
   :- click on the object -> server-side encryption settings -> select the encryption type
-  
-  
-  
-  
-  
-  
+• S3 Access Logs
+  :- Click on the bucket -> server access logging -> edit -> enable and select the bucket that logs to be stored
+• S3 Replication
+  :- Click on bukcet -> management -> Create replication -> Enable -> choose destination -> 
   
   
   

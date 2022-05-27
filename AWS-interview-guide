@@ -326,14 +326,12 @@ Routing Policies – Latency-based
   :- Click on the bucket -> server access logging -> edit -> enable and select the bucket that logs to be stored
 • S3 Replication
   :- Click on bukcet -> management -> Create replication -> Enable -> choose destination -> 
-  
-  
-  
-  
-  
-  
-  
-  
+
+• AWS CloudFront
+  :- Improves read performance, content is cached at the edge.
+  :- DDos protection, integration with Shield, AWS Web application Firewall
+  :- Can expose external HTTPS and can talk to internal HTTPS backends
+  :- 
   
   
   

@@ -331,8 +331,18 @@ Routing Policies – Latency-based
   :- Improves read performance, content is cached at the edge.
   :- DDos protection, integration with Shield, AWS Web application Firewall
   :- Can expose external HTTPS and can talk to internal HTTPS backends
-  :- 
-  
+
+• AWS Lambda
+  • Virtual functions – no servers to manage!
+  • Limited by time - short executions
+  • Run on-demand
+  • Scaling is automated! 
+• Integrated with the whole AWS suite of services
+• Integrated with many programming languages
+• Easy monitoring through AWS CloudWatch
+what to monitor on cloudwatch for lambda function?
+ how many times it invoked, how long it lasted, error and success rate.
+
   
   
   

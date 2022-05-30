@@ -365,17 +365,30 @@ How to schedule Lambda function using cloudwatch
   • 5 minutes TTL for cache (default)
   
 • AWS CloudWatch
-  • 
+  • CloudWatch provides metrics for every services in AWS
+  • Metric is a variable to monitor (CPUUtilization, NetworkIn…)
+  • Note: EC2 Memory usage is by default not pushed (must be pushed from inside the instance as a custom metric)
+  • Possibility to define and send your own custom metrics to CloudWatch
+  • Example: memory (RAM) usage, disk space, number of logged in users …
+  • Use API call PutMetricData
+  • By default, no logs from your EC2 machine will go to CloudWatch
+  • You need to run a CloudWatch agent on EC2 to push the log files you want
+  • Make sure IAM permissions are correct
+  • The CloudWatch log agent can be setup on-premises too
   
-
-  
-  
-  
-  
-  
-  
-  
-  
+• Role to collect metrics and logs from EC2 instance with Cloudwatch agent
+  :- roles -> create a role -> select EC2 -> search for the policies to attach the role (AmazonEC2roleforSSM, cloudwatchagentadminpolicy, coudwatchagentserverpolicy)
+     -> attach role to ec2 instance and install the cloudwatch agent -> and check the logs groups
+• Export cloudwatch logs to S3
+• AWS cloudwatch events to schedule Lambda function
+  :- Roles -> select Lambda service -> assign LambdaBasicExecutionRole -> while creating a lambda function attach an existing policy at the existing role section -> 
+    go to cloudwatch -> rules -> click on schedule and schedule the time -> click on target and select lambda function
+•  How to automatically stop/start EC2 instances using AWS Lambda function|cloudwathc events?
+   :- create a policy that allows stop and start the EC2 instance -> create the role -> select the AWS service Lambda -> attach the created policy -> while creating
+      go to cloudwatch -> rules -> click on schedule and schedule the time -> click on target and select lambda function (have to mention action parameter whether
+      start or stop)
+      
+      
   
   
   

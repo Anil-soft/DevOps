@@ -364,6 +364,8 @@ How to schedule Lambda function using cloudwatch
   • Microseconds latency for cached data
   • 5 minutes TTL for cache (default)
   
+• AWS CloudWatch
+  • 
   
 
   

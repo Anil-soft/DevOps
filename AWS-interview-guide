@@ -390,7 +390,33 @@ How to schedule Lambda function using cloudwatch
 •   How to attach AWS SSL certificate to ALB ?
     :- AWS certificate manager -> request a certificate -> go to ALB -> chosse listener -> click on add listener -> choose protol HTTPS -> default action forward to 
        add application -target group -> at default SSL certificate choose From ACM and select certificate.
- • 
+       
+• Networking - VPC
+  • VPC = Virtual Private Cloud
+  • You can have multiple VPCs in an AWS region (max. 5 per region – soft limit)
+  •  Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you've defined
+     
+• Subnets
+  :- A subnet is a range of IP addresses in your VPC. You can launch AWS resources into a specified subnet. 
+  :- Use a public subnet for resources that must be connected to the internet, and a private subnet for resources that won't be connected to the internet.
+• Route Table
+  :- Your VPC has an implicit router, and you use route tables to control where network traffic is directed.
+  :- Each subnet in your VPC must be associated with a route table, which controls the routing for the subnet (subnet route table). 
+  :- You can explicitly associate a subnet with a particular route table. 
+  :- A subnet can only be associated with one route table at a time, but you can associate multiple subnets with the same subnet route table.
+ 
+* Note:- public EC2 -> Router -> Internet Gateway -> Internet.
+• Internet Gateway (IGW)
+  :- Allows resources (e.g., EC2 instances) in a VPC connect to the Internet
+  :- Must be created separately from a VPC
+  :- One VPC can only be attached to one IGW and vice versa
+  :- Internet Gateways on their own do not allow Internet access…
+  :- Internet Gateways on their own do not allow Internet access… (Routing table -> routes -> add IGW)
+  
+  
+
+
+  
  
       
 

@@ -24,16 +24,6 @@
   :- High frequency online transaction processing (OLTP) systems
   :- Data warehousing applications
   
-<== Security Groups ==>
-  :- Security Groups are the fundamental of network security in AWS
-  :- They control how traffic is allowed into or out of our EC2 Instances
-  :- Security Groups are statuful 
-  :- It simply means if you allow say outbound rule on particular port protocol ip address it will allow to get back. So whatever comes in comes out.
-  :- Security groups only contain rules
-  :- Can be attached to multiple instances
-  :- All inbound traffic is blocked by default
-  :- All outbound traffic is authorised by default
-  
 <== Classic Ports to know ==>
 :- 22 = SSH (Secure Shell) - log into a Linux instance
 :- 21 = FTP (File Transfer Protocol) – upload files into a file share 
@@ -412,6 +402,39 @@ How to schedule Lambda function using cloudwatch
   :- One VPC can only be attached to one IGW and vice versa
   :- Internet Gateways on their own do not allow Internet access…
   :- Internet Gateways on their own do not allow Internet access… (Routing table -> routes -> add IGW)
+  
+* AWS NAT Gateways
+  :- A NAT gateway is a Network Address Translation (NAT) service.
+  :- You can use a NAT gateway so that instances in a private subnet can connect to services outside your VPC 
+      but external services cannot initiate a connection with those instances.
+  :- Instances in private subnets can connect to the internet through a public NAT gateway, 
+     but cannot receive unsolicited inbound connections from the internet. 
+  :- You create a public NAT gateway in a public subnet and must associate an elastic IP address with the NAT gateway at creation.
+  :- You route traffic from the NAT gateway to the internet gateway for the VPC.
+  :- You cannot associate a security group with a NAT gateway. You can associate security groups with your instances to control inbound and outbound traffic.
+  :- Each NAT gateway is created in a specific Availability Zone and implemented with redundancy in that zone.
+  
+<== Security Groups ==>
+  :- Security Groups are the fundamental of network security in AWS
+  :- Security works on instance levels
+  :- They control how traffic is allowed into or out of our EC2 Instances
+  :- Security Groups are statuful 
+  :- It simply means if you allow say outbound rule on particular port protocol ip address it will allow to get back. So whatever comes in comes out.
+  :- Security groups only contain rules
+  :- Can be attached to multiple instances
+  :- All inbound traffic is blocked by default
+  :- All outbound traffic is authorised by default
+  
+<== NACL (network access control lists) ==>
+  :- Operates at the subnet level
+  :- You can create a custom network ACL and associate it with a subnet. 
+     By default, each custom network ACL denies all inbound and outbound traffic until you add rules.
+  :- Each subnet in your VPC must be associated with a network ACL.
+     If you don't explicitly associate a subnet with a network ACL, the subnet is automatically associated with the default network ACL.
+  :- If you create a VPC with an IPv6 CIDR block or if you associate an IPv6 CIDR block with your existing VPC,
+      we automatically add rules that allow all IPv6 traffic to flow in and out of your subnet.
+  :- We also add rules whose rule numbers are an asterisk that ensures that a packet is denied if it doesn't match any of the other numbered rules. 
+  :- Network ACLs are stateless, which means that responses to allowed inbound traffic are subject to the rules for outbound traffic.
   
   
 

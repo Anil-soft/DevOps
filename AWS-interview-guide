@@ -435,6 +435,7 @@ How to schedule Lambda function using cloudwatch
       we automatically add rules that allow all IPv6 traffic to flow in and out of your subnet.
   :- We also add rules whose rule numbers are an asterisk that ensures that a packet is denied if it doesn't match any of the other numbered rules. 
   :- Network ACLs are stateless, which means that responses to allowed inbound traffic are subject to the rules for outbound traffic.
+  :- One subnet can be associated with only one NACL.
   
   
 

@@ -1,0 +1,10 @@
+<== Ansible installation ==>
+  - sudo amazon-linux-extras install ansible2
+  - add the private key (vi ec2-key.pem) assign chmod 400 ec2-key.pem permission
+  - ssh-agent bash
+  - cp ec2-key.pem ~/.ssh/
+    - ssh-add ~/.ssh/ec2-key.pem 
+  - create the inventory file and add the ips
+  
+  
+  

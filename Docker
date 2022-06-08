@@ -4,7 +4,7 @@
 -: docker ps -a  => to list the active and passive containers
 -: docker restart <container-id/name>  => to restart the container
 -: docker exec -it <container-id> /bin/bash  => to log in to the container
--: docker commit <container-id> "<image-name>"  => to create and image form container
+-: docker commit <container-id> "<image-name>"  => to create the image form container
 -: docker build -f "<image-name>" .  => to create an image from dockerfile
 Dockerfile:-
 FROM centos
@@ -12,16 +12,22 @@ RUN yum install telnet -y && useradd anil  => to run the command inside the cont
 ENV MYCOURSE=DevOps  => to export the env variables
 ADD mytarfile.tar /root/  => untar and copy the file
 COPY mytarfile.tr /root/ => only copy the file
-USER anil  => run an mage with the user anil
+USER anil  => run an image with the user anil
 EXPOSE 80  => to expose the container on port 80 
 WORKDIR /root/mydir  => to specify the working dir in container
 ENTRYPOINT ["/bin/bash", "/tmp/script1.sh"]  
 CMD ["/bin/bash", "/tmp/script1.sh"]
 -: CMD & ENTRYPOINT { "specifies the instruction that is to be executed when a Docker container starts. 
-This CMD command is not really necessary for the container to work, 
+This CMD command is not really necessary for the container to work, can override the instructions 
 as the echo command can be called in a RUN statement as well. 
 The main purpose of the CMD command is to launch the software required in a container." }
--: ENTRYPOINT can not change execution of container
+-: ENTRYPOINT can not change execution of container, can not change the instructions and can append 
+-: RUN - When you use a RUN command in your dockerfile, it always creates a new intermediate image layer on top of the previous ones.
+-: CMD - A CMD command is used to set a default command that gets executed once you run the Docker Container.
+         In case you provide a command with the Docker run command, the CMD arguments get ignored from the dockerfile.
+         In the case of multiple CMD commands, only the last one gets executed.
+
+   
 
 -: docker run mydockerfile:cmd /bin/bash /tmp/script1.sh
 -: docker run mydockerfile:entrypoint /bin/bash /tmp/script1.sh

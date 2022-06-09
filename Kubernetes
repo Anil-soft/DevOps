@@ -1,0 +1,28 @@
+* Kubernetes Components
+  * MASTER Components
+    ETCD - ETCD data store stores information regarding nodes,pods, configs, roles, accounts and secrets.
+         every information you see when you run kubectl get command that information from ETCD. it stores
+         the information in key value format.
+   
+   kube-apiserver - when run kubectl command that kubectl utility reaches the kube-apiserver kubeapi server
+         authenticates the request and validates and then retrieve the information from ETCD.
+                    
+   kube controller manager - manages various controllers in kubernetes, contineously monitors the status of the pods
+        and takes the necessary actions to remediate the situation
+                             
+   Node controller - contineously monitors the status of the nodes, taking necessary actions to keep the application
+        running
+        
+   Replication controller - contineously monitors the replicasets, desired number of replica sets are running or not,
+      if a pod dies it create another one.
+      
+  Kube scheduler - it should decide which pod should go to which node
+  
+* Node Components
+  kubelet - An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.
+  
+  kube-proxy - kube-proxy is a network proxy that runs on each node in your cluster, kube-proxy maintains network rules on nodes. 
+    These network rules allow network communication to your Pods
+   
+  Container runtime - The container runtime is the software that is responsible for running containers.
+         

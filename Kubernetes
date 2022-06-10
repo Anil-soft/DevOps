@@ -36,12 +36,37 @@
    kind - What kind of object you want to create
    metadata - Data that helps uniquely identify the object, including a name string, UID, and optional namespace
    spec - What state you desire for the object
-      
+   
+   <== commands ==>
    - kubectl get pods (to check how many pods exist on the system)
    - kubectl run nginx --image=nginx ( to create the pod from nginx image)
    - kubectl describe pod nginx ( to describe and to know more about the pod )
    - kubectl delete pod webapp ( to delete the pod )
    - kubectl run redis --image=redis123 --dry-run=client -o yaml > redis-definition.yaml
+   
+  <== YAML file to create the pod ==>
+  
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+   
+<== Replicaset ==> 
+ - A ReplicaSet ensures that a specified number of pod replicas are running at any given time. 
+ - However, a Deployment is a higher-level concept that manages ReplicaSets and provides declarative updates to Pods along with a lot of other useful features.
+ - Therefore, we recommend using Deployments instead of directly using ReplicaSets, unless you require custom update orchestration or don't require updates at all.
+ 
+ <== commands ==>
+ - kubectl replace -f replicaset-definition.yaml
+ - kubectl scale --replicas=6 -f replicaset-definition.yaml
+ - kubectl scale --replicas=6 replicaset myapp-replicaset
+ - 
       
          
          

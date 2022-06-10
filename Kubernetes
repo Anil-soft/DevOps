@@ -14,7 +14,7 @@
         running
         
    Replication controller - contineously monitors the replicasets, desired number of replica sets are running or not,
-      if a pod dies it create another one.
+      if a pod dies it creates another one.
       
   Kube scheduler - it should decide which pod should go to which node
   
@@ -25,4 +25,49 @@
     These network rules allow network communication to your Pods
    
   Container runtime - The container runtime is the software that is responsible for running containers.
+         
+<== POD ==> 
+   A Pod (as in a pod of whales or pea pod) is a group of one or more containers, 
+   with shared storage and network resources, and a specification for how to run the containers.
+   In terms of Docker concepts, a Pod is similar to a group of Docker containers with shared namespaces and shared filesystem volumes.
+      
+   YAML file containes:- 
+   apiVersion - Which version of the Kubernetes API you're using to create this object
+   kind - What kind of object you want to create
+   metadata - Data that helps uniquely identify the object, including a name string, UID, and optional namespace
+   spec - What state you desire for the object
+      
+   - kubectl get pods (to check how many pods exist on the system)
+   - kubectl run nginx --image=nginx ( to create the pod from nginx image)
+   - kubectl describe pod nginx ( to describe and to know more about the pod )
+   - kubectl delete pod webapp ( to delete the pod )
+   - kubectl run redis --image=redis123 --dry-run=client -o yaml > redis-definition.yaml
+      
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
          

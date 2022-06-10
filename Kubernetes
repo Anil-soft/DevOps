@@ -98,6 +98,19 @@ spec:
   - kubectl create deployment --image=nginx nginx --dry-run=client -o yaml > nginx-deployment.yaml
   - kubectl create -f nginx-deployment.yaml
   - kubectl create deployment --image=nginx nginx --replicas=4 --dry-run=client -o yaml > nginx-deployment.yaml
+  - kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1 ( update the nginx Pods to use the nginx:1.16.1 image instead of the nginx:1.14.2 image)
+  - kubectl rollout status deployment/nginx-deployment ( To see the rollout status )
+  - kubectl rollout undo deployment/nginx-deployment ( undo the current rollout and rollback to the previous revision )
+  Note:- you can pause rollouts for that Deployment before you trigger one or more updates
+  - kubectl rollout pause deployment/nginx-deployment
+  - kubectl rollout history deployment/nginx-deployment
+  - kubectl rollout resume deployment/nginx-deployment
+  
+* Progressing Deployment
+ - The Deployment creates a new ReplicaSet
+ - The Deployment is scaling up its newest ReplicaSet
+ - The Deployment is scaling down its older ReplicaSet
+ - New Pods become ready or available
   
 <== YAML file to create deployment ==>
 

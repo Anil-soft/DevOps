@@ -238,7 +238,7 @@ spec:
  So generate the file and modify the selectors before creating the service)
  - kubectl expose pod nginx --type=NodePort --port=80 --name=nginx-service --dry-run-client -o yaml
  (This will automatically use the pod's labels as selectors, but you cannot specify the node port.
- ou have to generate a definition file and then add the node port in manually before creating the service with the pod.)
+ you have to generate a definition file and then add the node port in manually before creating the service with the pod.)
  - kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client -o yaml
  
 * Namespaces
@@ -253,7 +253,23 @@ spec:
                                                                                   created on dev namespace)
   - kubectl get ns
   - kubectl run redis --image=redis -n finance 
-         
+  
+  <== Kubernetes Scheduler ==>
+   - A scheduler watches for newly created Pods that have no Node assigned.
+   - For every Pod that the scheduler discovers, the scheduler becomes responsible for finding the best Node for that Pod to run on.
+   - For every newly created pod or other unscheduled pods, kube-scheduler selects an optimal node for them to run on. 
+  
+  <== YAML file to schedule pod to the node ==>
+  ---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  -  image: nginx
+     name: nginx
+  nodeName: node01
          
          
          

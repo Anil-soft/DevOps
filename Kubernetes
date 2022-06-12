@@ -294,6 +294,7 @@ spec:
   - kubectl taint nodes node1 key2=value2:PreferNoSchedule
   - kubectl taint nodes node01 spray=mortein:NoSchedule
   - kubectl taint nodes controlplane node-role.kubernetes.io/master:NoSchedule- (untaint the node)
+ 
   
   <== YAML file to tolerate the pod ==>
    ---
@@ -311,7 +312,16 @@ spec:
     effect: NoSchedule
     operator: Equal
     
-  
+<== Node Affinity ==>
+ - Node affinity is conceptually similar to nodeSelector.
+ - allowing you to constrain which nodes your Pod can be scheduled on based on node labels.
+ 
+ <== commands ==>
+  - kubectl label nodes node01 key=value
+  - kubectl get nodes --show-labels
+
+
+
     
     
     

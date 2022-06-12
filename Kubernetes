@@ -270,6 +270,61 @@ spec:
   -  image: nginx
      name: nginx
   nodeName: node01
+  
+<== Labels and schedulers ==>
+ * Labels
+   - Labels are a type of metadata in Kubernetes that take on the form of a key-value pair attached to objects such as pods and services. 
+   - Labels are often used to describe identifying aspects of the object, possibly for use by the user at a later stage.
+   
+* Selectors
+  - As their name suggests, label selectors allow you to identify the objects you have tagged with particular labels. 
+  <== commands ==>
+   - kubectl get pods --selector env=dev ( to filter the pods in dev environment )
+   -  kubectl get all --selector env=prod,bu=finance,tier=frontend
+   
+* taints and tolerations
+  - Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints.
+  - Taints and tolerations work together to ensure that pods are not scheduled onto inappropriate nodes. 
+  - One or more taints are applied to a node; this marks that the node should not accept any pods that do not tolerate the taints.
+  - pods that do not tolerate the taint are evicted immediately
+  
+  <== commands ==>
+  - kubectl taint nodes node1 key1=value1:NoSchedule
+  - kubectl taint nodes node1 key1=value1:NoExecute
+  - kubectl taint nodes node1 key2=value2:PreferNoSchedule
+  - kubectl taint nodes node01 spray=mortein:NoSchedule
+  - kubectl taint nodes controlplane node-role.kubernetes.io/master:NoSchedule- (untaint the node)
+  
+  <== YAML file to tolerate the pod ==>
+   ---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bee
+spec:
+  containers:
+  - image: nginx
+    name: bee
+  tolerations:
+  - key: spray
+    value: mortein
+    effect: NoSchedule
+    operator: Equal
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
          
          
          

@@ -387,8 +387,10 @@ spec:
  - This means that the Pods running on a node are visible on the API server, but cannot be controlled from there. 
  - he Pod names will be suffixed with the node hostname with a leading hyphen.
   
-    
-    
+ - kubectl top node ( to see the performance metrics )
+ - kubectl top pod
+ 
+ 
     
     
     

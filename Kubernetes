@@ -390,21 +390,84 @@ spec:
  - kubectl top node ( to see the performance metrics )
  - kubectl top pod
  
+ * Rolling and Rollout updates
+  Rolling - replaces pods running the old version of the application with the new version, one by one, without downtime to the cluster.
+  Recreate - Terminate all the pods at a time and replace them with the new version (application faces downtime)
+  
+ * commands
+  - kubectl rollout status <deployment>
+  - kubectl rollout history <deployment>
+  - kubectl rollout undo <deployment>
+    
+ * YAML file for Deloyment strategie
  
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: default
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      name: webapp
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: webapp
+    spec:
+      containers:
+      - image: kodekloud/webapp-color:v2
+        name: simple-webapp
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+          
+* ConfigMap
+  A ConfigMap is an API object used to store non-confidential data in key-value pairs.
+  Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume
+kubectl create configmap webapp --from-literal=APP_COLOUR=darkblue
+
+<== YAML file to pass the env variables to pod ==>
+
+ ---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: webapp-color
+  name: webapp-color
+  namespace: default
+spec:
+  containers:
+  - env:
+    - name: APP_COLOR
+      value: green
+    image: kodekloud/webapp-color
+    name: webapp-color
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-         
-         
-         
+<== YAML to inspect configmap from pod ==>   
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: webapp-color
+  name: webapp-color
+  namespace: default
+spec:
+  containers:
+  - envFrom:
+    - configMapRef:
+         name: webapp-config-map
+    image: kodekloud/webapp-color
+    name: webapp-color
+
+              
          
          
          

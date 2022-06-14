@@ -467,6 +467,38 @@ spec:
     image: kodekloud/webapp-color
     name: webapp-color
 
+* Secrets
+  A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key. 
+  Such information might otherwise be put in a Pod specification or in a container image. 
+  Kubernetes Secrets are, by default, stored unencrypted in the API server's underlying data store (etcd). 
+  Anyone with API access can retrieve or modify a Secret, and so can anyone with access to etcd. 
+  Additionally, anyone who is authorized to create a Pod in a namespace can use that access to read any Secret in that namespace;
+  
+* Commands
+  kubectl create secret generic <secret name> --from-literal=<key>=<value>
+  kubectl create secret generic <secret name> --from-file=<path-to-file>
+  kubectl get secret app-secret -o yaml
+  
+<== YAML file to create to inject the secret to the pod ==>
+
+---
+apiVersion: v1 
+kind: Pod 
+metadata:
+  labels:
+    name: webapp-pod
+  name: webapp-pod
+  namespace: default 
+spec:
+  containers:
+  - image: kodekloud/simple-webapp-mysql
+    imagePullPolicy: Always
+    name: webapp
+    envFrom:
+    - secretRef:
+        name: db-secret
+  
+  
               
          
          

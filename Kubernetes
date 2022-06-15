@@ -514,6 +514,13 @@ spec:
   - name: gold
     image: redis
   
+* Upgrade
+  - kubectl drain node01 (take out the node01 from maintenance, pods will be evicted)
+  - kubectl uncordon node01 (schedulable the node)
+  - kubectl cordon node01 (to unschedulable, future pods will not be scheduled on node01)
+  
+* Backup the cluster resources
+  - kubectl get all --all-namespaces -o yaml > all-deploy-services.yaml
               
          
          

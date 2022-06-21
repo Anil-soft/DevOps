@@ -522,16 +522,42 @@ spec:
 * Backup the cluster resources
   - kubectl get all --all-namespaces -o yaml > all-deploy-services.yaml
               
+* Network Policy
+  - If you want to control traffic flow at the IP address or port level (OSI layer 3 or 4), 
+    then you might consider using Kubernetes NetworkPolicies for particular applications in your cluster.
+  - NetworkPolicies apply to a connection with a pod on one or both ends, and are not relevant to other connections.
+  - When defining a pod- or namespace- based NetworkPolicy, you use a selector to specify what traffic is allowed to and from the Pod(s) that match the selector.
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: multi-port-egress
+spec:
+  podSelector:
+    matchLabels:
+      role: db
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+            matchLabels:
+              name: frontend
+      namespaceSelector:
+          matchLabels:
+            name: prod
+    ports:
+    - protocol: TCP
+      port: 6379
+         
+*          
          
          
          
          
          
          
-         
-         
-         
-         
+        
          
          
          

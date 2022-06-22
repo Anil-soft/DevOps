@@ -38,8 +38,10 @@ The main purpose of the CMD command is to launch the software required in a cont
  - mkfs.ext4 /dev/myvg/mylv
  - mount -t ext4 /dev/myvg/mylv/ /mydocdata/
  -: docker run -it --name <container-name> -v /mydocdata/:/myapp centos /bin/bash  => to attach volume to the container
- -: man docker-run  => manual page to refer some options
- -: docker network create --driver=bridge --subnet=10.1.0.0/16 --ip-range=10.1.4.0/24 --gateway=10.1.0.1 anil-network  => to create the network
+ -: docker run -v data_volume:/var/lib/mysql mysql  => to mount the volume to the container (/var/lib/mysql default folder to mount the volume)
+ -: docker run -v /data/mysql:/var/lib/mysql mysql  => ( bind mount will mount the directory )
+ -: docker run --mount type=bind,source=/data/mysql,target=/var/lib/mysql mysql
+ -: man docker-run  => manual page to refer t--subnet=10.1.0.0/16 --ip-range=10.1.4.0/24 --gateway=10.1.0.1 anil-network  => to create the network
  { docker network type }
  -  bridge
  -  host

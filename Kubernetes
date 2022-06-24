@@ -551,7 +551,81 @@ spec:
       port: 6379
          
 * PersistentVolume and PersistentVolumeClaim
-  - 
+  - A PersistentVolume (PV) is a piece of storage in the cluster that has been provisioned by an administrator or dynamically provisioned using Storage Classes.
+  - It is a resource in the cluster just like a node is a cluster resource.
+  - PVs are volume plugins like Volumes, but have a lifecycle independent of any individual Pod that uses the PV.
+  - A PersistentVolumeClaim (PVC) is a request for storage by a user. It is similar to a Pod. 
+  - Pods consume node resources and PVCs consume PV resources.
+  - If a user deletes a PVC in active use by a Pod, the PVC is not removed immediately. 
+  - PVC removal is postponed until the PVC is no longer actively used by any Pods. 
+  - Also, if an admin deletes a PV that is bound to a PVC, the PV is not removed immediately.
+  - PV removal is postponed until the PV is no longer bound to a PVC.
+  
+  * YAML file for persistentvolume
+  apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    name: pv-vol1
+  spec:
+    accessModes:
+        - ReadWriteOnce
+    capacity:
+        storage: 1Gi
+    hostpath:
+       path:/tmp/data
+  
+* YAML file for persistentvolumeclaims
+  apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: myclaim
+  spec:
+    accessmodes:
+       - ReadWriteOnce
+    resources:
+       requests:
+         storage: 500Mi
+         
+* Using PVCs on pod
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+    - name: myfrontend
+      image: nginx
+      volumeMounts:
+      - mountPath: "/var/www/html"
+        name: mypd
+  volumes:
+    - name: mypd
+      persistentVolumeClaim:
+        claimName: myclaim
+        
+Note:- ps aux  -> linux command to check the processors running on the host
+       ip link -> to check the network interfaces
+       ip netns -> to check network namespaces 
+ 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
          
          
          

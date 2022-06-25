@@ -48,7 +48,11 @@ resource "aws_instance" "web" {
     Name = "HelloWorld"
   }
 } 
-          
+ output "myec2pubname" {
+         value = "${aws_instance.web.public_dns}"
+ }
+ 
+ 
           
           
           

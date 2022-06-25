@@ -37,6 +37,8 @@ The main purpose of the CMD command is to launch the software required in a cont
  - lvcreate -L +4G -n mylv myvg
  - mkfs.ext4 /dev/myvg/mylv
  - mount -t ext4 /dev/myvg/mylv/ /mydocdata/
+ -: docker volume create my_data
+ -: docker volume inspect my_data  (to check the where the volume storing information_
  -: docker run -it --name <container-name> -v /mydocdata/:/myapp centos /bin/bash  => to attach volume to the container
  -: docker run -v data_volume:/var/lib/mysql mysql  => to mount the volume to the container (/var/lib/mysql default folder to mount the volume)
  -: docker run -v /data/mysql:/var/lib/mysql mysql  => ( bind mount will mount the directory )
@@ -47,6 +49,7 @@ The main purpose of the CMD command is to launch the software required in a cont
  -  host
  -  none
  
+ -: docker network create --driver=bridge anil_network
  -: docker run -itd --name network1 --net  <network-name> centos /bin/bash  => to create the container with the specified network
  -: docker run -itd --name network1 --net  <network-name> --ip <ip-addr> centos /bin/bash  ==> to create the container with the specified IP\
  -: docker logs mycont1  => to check the container logs
@@ -75,7 +78,7 @@ The main purpose of the CMD command is to launch the software required in a cont
     -: docker tag centos:7 anil3078/centos:7
     -  docker push <image-name> 
  
- -: docker run -d -p 8080:80 --name httpd-container httpd  => mapping the port to the container, 8080 is the host machine and 80 is the container por,
+ -: docker run -d -p 8080:80 --name httpd-container httpd  => mapping the port to the container, 8080 is the host machine and 80 is the container port,
       container port is used only to communicate internally
       
  -: 

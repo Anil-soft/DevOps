@@ -52,12 +52,105 @@ resource "aws_instance" "web" {
          value = "${aws_instance.web.public_dns}"
  }
  
+  - terraform workspace list => to list out the terrafom workspaces
+  - terrraform workspace new dev => to create the new workspace
+  - terraform workspace select prod => to switch the workspace
+  
+  * S3 bucket creation
+  resouces "random_id" "myrandom_id"{
+        byte_length = 2
+     }
+  resource "aws_s3_bucket" "mys3_bucket" {
+  bucket = "anils3bucket-${random_id.myrandom_id.hex}"
+
+  tags = {
+    Name        = "anils3bucket-${random_id.myrandom_id.hex}"
+  }
+}
+
+* VPC creation
+  resource "aws_vpc" "my_vpc" {
+  cidr_block       = "10.0.0.0/16"
+
+  tags = {
+    Name = "anil_vpc"
+  }
+}
  
+* IGW creation
+resource "aws_internet_gateway" "my_igw" {
+  vpc_id = "${aws_vpc.my_vpc.id}"
+
+  tags = {
+    Name = "myigw"
+  }
+}
+
+* route table creation
+  resource "aws_route_table" "example" {
+  vpc_id = "${aws_vpc.example.id}"
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "${aws_internet_gateway.example.id}"
+  }
+  
+  tags = {
+    Name = "example"
+  }
+}
+
+* subnet creation
+resource "aws_subnet" "main" {
+  vpc_id     = "${aws_vpc.main.id}"
+  cidr_block = "10.0.1.0/24"
+
+  tags = {
+    Name = "Main"
+  }
+}
           
+* route table association
+ resource "aws_route_table_association" "a" {
+  subnet_id      = "${aws_subnet.mysubnet.id}"
+  route_table_id = "${aws_route_table.myroutetable.id}"
+}
+
+* Security Group creation
+  resource "aws_security_group" "my_sg" {
+  name        = "anil_sg"
+  description = "Allow all traffic"
+  vpc_id      = "${aws_vpc.main.id}"
+
+  ingress {
+    description      = "TLS from VPC"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "anil_sg"
+  }
+}
           
-          
-          
-          
+* terraform
+terraform {
+  backend "s3" {
+    bucket = "mybucket"
+    key    = "myapp/dev/terraform.tfstate"
+    region = "us-east-1"
+    dynamodb_table = "terraformstate"
+  }
+}
           
           
           

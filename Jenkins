@@ -9,5 +9,22 @@
   Step:- 2
   Create the Pipeline job and wirte the pipeline script
   
+  pipeline{
+  agent any
+  stages{
+       stage ('SCM Checkout'){
+            steps{
+                git '<github-repo>'
+            }
+       }
+       stage ('Execute Ansible'){
+             steps{
+                  ansiblePlaybook credentailsID: 'private-key', disableHostKeyChecking: true, installation: 'ansible2', inventory: 'dev.inv', playbook: 'apache.yaml,
+             }
+       }
+  }
+}
+
+  
   
   

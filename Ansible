@@ -139,7 +139,75 @@
     uid: 1040
     group: admin
     
+ * ignore errors
+ 
+- name: working with special cases
+  hosts: server1
+  tasks:
+    - name: executing script
+      script: ./script.py
+      ignore_errors: true
+      
+    - name: running the command
+      command: echo "Hi, this is task two"
+      
+  * delegate to
+     
+     - name: printing hostname
+       command: hostname
+       delegate_to: server2
+       
+  * serial module
+  
+    - name: working with serial module
+      hosts: all
+      serial: 1
+      tasks:
+        - name: printing the hostname
+          command: hostname
+          
+  * Ansible vault
+  
+  - ansible-vault create mydbpass.yaml
+  - ansible-vault view mydbpass.yaml 
+  - ansible-playbook --ask-vault-pass myvault.yaml  => it asks us to give the password to decrypt the secret
+  - ansible-playbook --vault-password-file=mypassword myvault.yaml
+  - --syntax-check (to check the syntax)
+  - --list-tasks (to list out the tasks)
+  - ansible-playbook -t "t1,t3" main.yaml  => to execute only t1,t3 tasks
+  
+  * import playbook
+    - import_playbook: conditions.yaml  (you can import one playbook in another playbook and run both playbooks at a time)
     
+ Note:- curl http://<ip-addr>/latest/meta-data/public-ipv4 (we can get the server information)
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
     
     
     

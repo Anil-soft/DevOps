@@ -6,6 +6,24 @@
     - ssh-add ~/.ssh/ec2-key.pem 
   - create the inventory file and add the ips
   
+  ---
+- hosts: webservers
+  become: True
+  tasks:
+    - name: install packages
+      ansible.builtin.yum:
+        name: httpd
+        state: present
+    - name: start apache server
+      service:
+         name: httpd
+         state: started
+         enable: True
+    - name: deploy static website
+      copy:
+        src: index.html
+        dest: /var/www/html/
+  
   * Ansible Roles
   
   - defaults :- default variables for the role

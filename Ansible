@@ -6,12 +6,17 @@
     - ssh-add ~/.ssh/ec2-key.pem 
   - create the inventory file and add the ips
   
+ :- Ansible works on client only model which means no need to have master server
+ :- if we want define variables for the particulary server we have create the dir called hosts_vars and variable file should be same as server name
+ :- to define variables for the set of group of servers have to create the dir called group_Vars
+ Note:- ansible.cfg file the important file in ansible which is having all the information like inventory, interpreter, private key file, privilege escalation
+ Idempotency:- if the configuration is already existed then i will skip or else it will execute the configation
   ---
 - hosts: webservers
   become: True
   tasks:
     - name: install packages
-      ansible.builtin.yum:
+      yum:
         name: httpd
         state: present
     - name: start apache server
@@ -36,5 +41,72 @@
   - vars:- other variables for the role
   
    - ansible-galaxy init webserver --offline  => to create the roles called webserver through ansible-galaxy
-   - 
+ 
+ * File Module
+    
+- name: create a file
+  file:
+    path: /etc/file1.txt
+    state: touch
+    owner: ec2-user
+    group: ec2-user
+    mode: '0644'
+    
+- name: create a dir
+  file:
+  path: /etc/anil_dir
+  state: directory
+  mode: '0755'
+  
+* copy module
+  
+- copy:
+    src: /etc/myfiles/file1.txt
+    dest: /etc/file1.txt
+    owner: root
+    group: root
+    mode: 0644
+    
+* Script module
+  
+- name: working with ansible
+  hosts: server1
+  tasks:
+    - name: executing script
+      script: ./script.sh
+      register: myoutput
+      
+    - debug: msg="{{myoutput}}"
+    
+ * vars 
+    
+- name: working with ansible
+  hosts: server1
+  vars:
+    myvar: 100
+  tasks:
+    - name: printing the varaible value
+      command: echo "my varaible value is {{myvar}}"
+      
+- name: working with ansible
+  hosts: server1
+  vars_files:
+    - myvarfile.yaml
+  tasks:
+    - name: printing the varaible value
+      command: echo "my current batch name is {{ batchname }}"
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   

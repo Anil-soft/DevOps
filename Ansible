@@ -181,6 +181,38 @@
     
  Note:- curl http://<ip-addr>/latest/meta-data/public-ipv4 (we can get the server information)
  
+ * install mysql
+ 
+ ---
+- name: installing mysql and dependencies 
+  package:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - mysql-server
+    - mysql-client
+    - python3-mysqldb
+    - ibmysqlclient-dev
+    
+- name: start and enable mysql service
+  systemd:
+    name: mysql
+    enabled: yes
+    
+- name: creating the user admin
+  mysql_user:
+    name: "admin"
+    password: "admin123"
+    priv: '*.*:ALL'
+    host: '%'
+    state: present
+    
+- name: creating database
+  mysql_db:
+    name: "mydatabase"
+    state: "present"
+  
+    
     
     
     

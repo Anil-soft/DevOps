@@ -7,9 +7,17 @@
   - create the inventory file and add the ips
   
  :- Ansible works on client only model which means no need to have master server
+ 
  :- if we want define variables for the particulary server we have create the dir called hosts_vars and variable file should be same as server name
+ 
  :- to define variables for the set of group of servers have to create the dir called group_Vars
+ 
+ :- ansible -m setup -a "filter=ansible_distribution" server1 => to print the server information
+ 
+ :- ansible-playbook dev.yaml -e my_name=anil => to pass the variable from command line
+ 
  Note:- ansible.cfg file the important file in ansible which is having all the information like inventory, interpreter, private key file, privilege escalation
+ 
  Idempotency:- if the configuration is already existed then i will skip or else it will execute the configation
   ---
 - hosts: webservers
@@ -95,6 +103,58 @@
   tasks:
     - name: printing the varaible value
       command: echo "my current batch name is {{ batchname }}"
+
+* with_items
+
+- name: printing the data
+  command: echo "hi i am {{item}}"
+  with_items: [10,20,30,40]
+  
+- name: printing the file
+  command: echo "{{item}}"
+  with_fileglob:
+    - "/tmp/*"
+    
+- name: printing the file content
+  command: echo "{{item}}"
+  with_lines:
+    - "cat /etc/hosts"
+    
+- name: printing the sequence
+  command: echo "{{item}}"
+  with_sequence: start=1 end=5
+    
+- name: printing the dictionary values
+  command: echo "{{item.key}} ==> {{item.value}}"
+  with_dict:
+    "{{ansible_default_ipv4}}"
+  
+ * user creation
+    
+- name: Add the user 'anil' with a specific uid and a primary group of 'admin'
+  user:
+    name: anil
+    shell: /bin/bash
+    comment: John Doe
+    uid: 1040
+    group: admin
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

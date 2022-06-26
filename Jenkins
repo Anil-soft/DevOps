@@ -1,0 +1,13 @@
+* How to integrate ansible through jenkins
+
+  Step:-1
+  - Manage Jenkins -> Manage Plugins -> download the ansible plugin
+  
+  Step:-2
+  - Global Tool Configuration -> Ansible (ansible installations)-> give the path where ansible should be executed (/usr/bin/ansible)
+  
+  Step:- 2
+  Create the Pipeline job and wirte the pipeline script
+  
+  
+  

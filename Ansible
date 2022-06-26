@@ -6,5 +6,17 @@
     - ssh-add ~/.ssh/ec2-key.pem 
   - create the inventory file and add the ips
   
+  * Ansible Roles
   
+  - defaults :- default variables for the role
+  - Files:- Contains files to copy to destination
+  - Handlers:- Based on notify do something specified
+  - Meta:- meta data about current role ( like what is the ansible version, who is the author )
+  - Tasks:- List of task that to be executed
+  - Templates:- Template files to deploy
+  - test:- if you want additional verification of your build
+  - vars:- other variables for the role
+  
+   - ansible-galaxy init webserver --offline  => to create the roles called webserver through ansible-galaxy
+   - 
   

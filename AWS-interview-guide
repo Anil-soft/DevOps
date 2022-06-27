@@ -214,6 +214,10 @@ Encryption: encrypt an unencrypted EBS volume
   • Load Balancer Information 
   • Scaling Policies
   
+• Difference between launch configuration and launch templates
+ - launch configurations are immutable, limited configurations and not recommended by AWS
+ - launch templates supports multi versions, recommended by aws
+  
 <== Auto Scaling Alarms ==>
 :- It is possible to scale an ASG based on CloudWatch alarms
 :- An Alarm monitors a metric (such as Average CPU)

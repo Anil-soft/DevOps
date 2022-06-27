@@ -241,7 +241,7 @@ Encryption: encrypt an unencrypted EBS volume
   :- When RDS detects you are running out of free database storage, it scales automatically
   :- Read replicas are used for SELECT (=read) only kind of statements (not INSERT, UPDATE, DELETE)
   :- Possibility to encrypt the master & read replicas with AWS KMS - AES-256 encryption
-  :- Encryption has to be defined at launch time
+  :- Encryption has to be defined at launch time 
   :- Aurora can have 15 replicas while MySQL has 5, and the replication process is faster (sub 10 ms replica lag)
   
   <== Route53 ==>
@@ -370,21 +370,6 @@ How to schedule Lambda function using cloudwatch
   • Make sure IAM permissions are correct
   • The CloudWatch log agent can be setup on-premises too
   
-• Role to collect metrics and logs from EC2 instance with Cloudwatch agent
-  :- roles -> create a role -> select EC2 -> search for the policies to attach the role (AmazonEC2roleforSSM, cloudwatchagentadminpolicy, coudwatchagentserverpolicy)
-     -> attach role to ec2 instance and install the cloudwatch agent -> and check the logs groups
-• Export cloudwatch logs to S3
-• AWS cloudwatch events to schedule Lambda function
-  :- Roles -> select Lambda service -> assign LambdaBasicExecutionRole -> while creating a lambda function attach an existing policy at the existing role section -> 
-    go to cloudwatch -> rules -> click on schedule and schedule the time -> click on target and select lambda function
-•  How to automatically stop/start EC2 instances using AWS Lambda function|cloudwathc events?
-   :- create a policy that allows stop and start the EC2 instance -> create the role -> select the AWS service Lambda -> attach the created policy -> while creating
-      go to cloudwatch -> rules -> click on schedule and schedule the time -> click on target and select lambda function (have to mention action parameter whether
-      start or stop)
-•   How to attach AWS SSL certificate to ALB ?
-    :- AWS certificate manager -> request a certificate -> go to ALB -> chosse listener -> click on add listener -> choose protol HTTPS -> default action forward to 
-       add application -target group -> at default SSL certificate choose From ACM and select certificate.
-       
 • Networking - VPC
   • VPC = Virtual Private Cloud
   • You can have multiple VPCs in an AWS region (max. 5 per region – soft limit)
@@ -440,3 +425,41 @@ How to schedule Lambda function using cloudwatch
   :- We also add rules whose rule numbers are an asterisk that ensures that a packet is denied if it doesn't match any of the other numbered rules. 
   :- Network ACLs are stateless, which means that responses to allowed inbound traffic are subject to the rules for outbound traffic.
   :- One subnet can be associated with only one NACL.
+
+<== AWS Interview Questions ==>
+
+How to create the automated backups for instance or volumes
+go to lifecycle manager -> select the instance or volume -> select the tag -> schedule the time 
+
+how to take rds backups
+while creating rds database, we can enable to automatic backup and give the retention period
+
+How to protect APIs using WAF
+AWS firewall manager -> ipsets -> create ip set -> give the ips that to be blocked
+web ACL -> create the web acl -> select the resource which is to be protected -> add a rule and give the ipsets
+
+• Role to collect metrics and logs from EC2 instance with Cloudwatch agent
+  :- roles -> create a role -> select EC2 -> search for the policies to attach the role (AmazonEC2roleforSSM, cloudwatchagentadminpolicy, coudwatchagentserverpolicy)
+     -> attach role to ec2 instance and install the cloudwatch agent -> and check the logs groups
+• AWS cloudwatch events to schedule Lambda function
+  :- Roles -> select Lambda service -> assign LambdaBasicExecutionRole -> while creating a lambda function attach an existing policy at the existing role section -> 
+    go to cloudwatch -> rules -> click on schedule and schedule the time -> click on target and select lambda function
+•  How to automatically stop/start EC2 instances using AWS Lambda function|cloudwathc events?
+   :- create a policy that allows stop and start the EC2 instance -> create the role -> select the AWS service Lambda -> attach the created policy -> while creating
+      go to cloudwatch -> rules -> click on schedule and schedule the time -> click on target and select lambda function (have to mention action parameter whether
+      start or stop)
+•   How to attach AWS SSL certificate to ALB ?
+    :- AWS certificate manager -> request a certificate -> go to ALB -> chosse listener -> click on add listener -> choose protol HTTPS -> default action forward to 
+       add application -target group -> at default SSL certificate choose From ACM and select certificate.
+       
+
+
+
+
+
+
+
+
+
+
+

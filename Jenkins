@@ -1,3 +1,5 @@
+jenkins plugins:- ssh agent, pipeline, multibranch scan webhook trigger, ansible, github, Maven integration
+
 * How to integrate ansible through jenkins
 
   Step:-1
@@ -24,6 +26,43 @@
        }
   }
 }
+
+multibranch pipeline
+install pipeline pluging and multibranch scan webhook trigger -> create the multibranch pipeline job -> and configure the github
+
+Master and slave node configuration:
+Manage Jenkins --> Manage nodes and clouds --> New node
+
+Name: uniquely identifies an agent within this Jenkins installation
+Description:
+Number of executors: 2
+Remote root directory: /home/ec2-user/maven-agent
+Labels: Labels (or tags) are used to group multiple agents into one logical group.
+
+launch the agent.jar on the slave node to connect with the Master jenkins
+
+  echo "secret_key" > secret-file
+  java -jar agent.jar -jnlpUrl http://<Jenkins_URL>/computer/abc/jenkins-agent.jnlp -secret @secret-file -workDir "/home/ec2-user" --> hit this command to connect
+  master jenkiins
+  
+  while creating the job select the option like { Restrict where this project can be run } and give the label.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

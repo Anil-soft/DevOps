@@ -608,6 +608,33 @@ Note:- ps aux  -> linux command to check the processors running on the host
        ip link -> to check the network interfaces
        ip netns -> to check network namespaces 
  
+<== RBAC role based authentication control ==>
+    Role-based access control (RBAC) is a method of regulating access to computer or network resources 
+    based on the roles of individual users within your organization.
+    
+Generating private key for John (john.key)
+$ openssl genrsa -out john.key 2048
+
+Generating certificate signing request (john.csr)
+$ openssl req -new -key john.key -out john.csr -subj "/CN=john/O=finance"
+
+Copy kubernetes ca certificate and key from the master node kmaster
+$ scp root@kmaster:/etc/kubernetes/pki/ca.{crt,key} .
+
+Sign the certificate using certificate authority
+$ openssl x509 -req -in john.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out john.crt -days 365
+    
+    * YAML file
+      
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: pod-reader
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
 
   
   

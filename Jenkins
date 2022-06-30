@@ -91,6 +91,35 @@ post {
 }
 
 
+tomcat pipeline to deploy war file on to the tomcat 
+
+pipeline {
+	agent any
+	environment {
+		PATH = "/opt/apache-maven-3.6.3/bin:$PATH"
+	}
+	stages {
+		stage ("clone code") {
+			steps{
+				git credentialsId: 'git_credentials', url: '<github_url>'
+			{
+		}
+		stage ("build code"){
+			steps{
+				sh "mvn clean install"
+			}
+		}
+		stage ("deploy"){
+			steps{
+			  sshagent(['deploy_user']){
+			sh "scp -o StrickHostkeyChecking=no <src_file> username@IP:<dest_path>"
+			
+				}
+			}
+		}
+		
+	}
+ }
 
 
 

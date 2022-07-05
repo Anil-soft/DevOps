@@ -452,6 +452,8 @@ web ACL -> create the web acl -> select the resource which is to be protected ->
     :- AWS certificate manager -> request a certificate -> go to ALB -> chosse listener -> click on add listener -> choose protol HTTPS -> default action forward to 
        add application -target group -> at default SSL certificate choose From ACM and select certificate.
        
+AWS Interview questions:- 
+
 
 
 

@@ -484,9 +484,13 @@ How to connect to VPC on different region?
 How to distribute application load in different region?
    Route53 >> global load balancer 
    
+ cron job format
+ minute, Hour, day of the month, month, day of the week.
  
-
-
+ How to host static website on S3?
+  create bucket with the same name as static website
+  properties - enable static website hosting - give the index.html file
+  permissions - enable the public access
 
 
 

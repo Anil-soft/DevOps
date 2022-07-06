@@ -470,10 +470,21 @@ AWS Interview questions:-
     rpm -qa -> to list the packages
     yum remove <package name> -y
     
- if CPU goes above of set thresold, what could be the reason and what should be the trobleshoot action?
+ if CPU goes above of set thresold, what could be the reason and what should be the troubleshoot action?
     cat /proc/loadavg -> to check the cpu utilization
     cloudwatch - create alaram - all metrics - ec2 metrics - per instance metrics - define the thresold value
     under notifications - chose in alaram - select an SNS topic to notify when alaram is in alaram state
+    
+how to check disk read and write commands what is the command?
+  iostat
+  
+How to connect to VPC on different region?
+  VPC peering
+  
+How to distribute application load in different region?
+   Route53 >> global load balancer 
+   
+ 
 
 
 

@@ -453,6 +453,27 @@ web ACL -> create the web acl -> select the resource which is to be protected ->
        add application -target group -> at default SSL certificate choose From ACM and select certificate.
        
 AWS Interview questions:- 
+  
+  can we attach S3 to EC2 instance if not why?
+    aws s3 sync s3://remote_S3_bucket local_directoryaws
+    
+  how can we attach EFS to EC2 instance?
+    create an EFS,  Configure file system settings page, for Throughput mode, choose Bursting. For Performance mode, choose General Purpose
+    while creating an instance at the configuration instance settings, add the filesystem that we created. once log in to the instance, hit the command
+      df -T -h to check whether it is mounted or not.
+      
+  How to clear the disk space in Linux?
+    df -Th -> to check the filesystems 
+    yum autoremove -> to remove the unwanted packages on linux
+    yum clean all  -> to cean the chache data
+  removed the unused installed packages
+    rpm -qa -> to list the packages
+    yum remove <package name> -y
+    
+ if CPU goes above of set thresold, what could be the reason and what should be the trobleshoot action?
+    cat /proc/loadavg -> to check the cpu utilization
+    cloudwatch - create alaram - all metrics - ec2 metrics - per instance metrics - define the thresold value
+    under notifications - chose in alaram - select an SNS topic to notify when alaram is in alaram state
 
 
 

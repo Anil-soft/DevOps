@@ -638,9 +638,116 @@ rules:
   resources: ["pods"]
   verbs: ["get", "watch", "list"]
 
+  <== kubernetes interview questions and answers ==>
+     1. what is taint and tolerations ?
+       - Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints.
+       - Taints and tolerations work together to ensure that pods are not scheduled onto inappropriate nodes. 
+       - One or more taints are applied to a node; this marks that the node should not accept any pods that do not tolerate the taints.
+       - pods that do not tolerate the taint are evicted immediately
   
+       - kubectl taint nodes node1 key1=value1:NoSchedule
+       
+    2. what is node affinity and pod affinity
+       - Node affinity is conceptually similar to nodeSelector.
+       - allowing you to constrain which nodes your Pod can be scheduled on based on node labels.
+       - requiredDuringSchedulingIgnoredDuringExecution
+       - While scheduling workload, when we need to schedule a certain set of pods together, PodAffinity makes sense. Example, a web server and a cache.
+       - While scheduling workload, when we need to make sure that a certain set of pods are not scheduled together, PodAntiAffinity makes sense.
+       
+    3. how to check the logs of a pod or deployment?
+       - kubectl logs my-pod 
+       - kubectl logs -l name=myLabel (check labels with the label name)
+       
+    4. what is the deployment strategy in kubernetes?
+      - Rolling Update Deployment. The rolling deployment is the default deployment strategy in Kubernetes.
+      -  It replaces pods, one by one, of the previous version of our application with pods of the new version without any cluster downtime.
+      
+    5. what is init containers?
+       - A Pod can have multiple containers running apps within it, but it can also have one or more init containers, 
+         which are run before the app containers are started.
+       - If a Pod's init container fails, the kubelet repeatedly restarts that init container until it succeeds.
+       - It contains utilities or setup scripts not present in an app image ( making images light-weight)
+       - They always run to completion
+       - Init container executes sequentially and each of the init containers must succeed before the next can run.
+  <== YAML file ==>      
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox:1.28
+    command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+  initContainers:
+  - name: init-myservice
+    image: busybox:1.28
+    command: ['sh', '-c', "until nslookup myservice.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
+  - name: init-mydb
+    image: busybox:1.28
+    command: ['sh', '-c', "until nslookup mydb.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done"]
+    
+6. what is statefullset?
+   - If you want to use storage volumes to provide persistence for your workload, you can use a StatefulSet as part of the solution. 
+  <== YAML file ==>
   
-  
+  apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  selector:
+    matchLabels:
+      app: nginx # has to match .spec.template.metadata.labels
+  serviceName: "nginx"
+  replicas: 3 # by default is 1
+  minReadySeconds: 10 # by default is 0
+  template:
+    metadata:
+      labels:
+        app: nginx # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: nginx
+        image: k8s.gcr.io/nginx-slim:0.8
+        ports:
+        - containerPort: 80
+          name: web
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "my-storage-class"
+      resources:
+        requests:
+          storage: 1Gi
+          
+   7. what is ingress in kubernetes?
+      
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   
   
   

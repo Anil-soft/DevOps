@@ -730,6 +730,236 @@ spec:
           storage: 1Gi
           
    7. what is ingress in kubernetes?
+       - Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. 
+       - Traffic routing is controlled by rules defined on the Ingress resource.
+       
+      * YAML file
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx-example
+  rules:
+  - http:
+      paths:
+      - path: /testpath
+        pathType: Prefix
+        backend:
+          service:
+            name: test
+            port:
+              number: 80
+              
+8. what is livenessprobe and readynesspeobe in kubernetes?
+   Readiness Probe
+  - Readiness probes determine whether or not a container is ready to serve requests. 
+  - If the readiness probe returns a failed state, then Kubernetes removes the IP address for the container from the endpoints of all Services.
+  
+   Livenessprobe
+  - Liveness probes determine whether or not an application running in a container is in a healthy state. 
+  - If the liveness probe detects an unhealthy state, then Kubernetes kills the container and tries to redeploy it.
+  
+9. How to connect to the kubernetes pods?
+   kubectl exec -it -n <your_namespace> <pod_name> -- bash
+   
+10. how will you make sure that the database should start first and then application?
+    init containers
+    
+11. Types of storage class used in your project?
+    AWS EBS volume
+    create an EBS volume and attach it to the node
+    step:- 1 create the storage class
+    
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: standard
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+reclaimPolicy: Retain
+mountOptions:
+  - debug
+volumeBindingMode: Immediate
+
+    
+step:- 2 add volume to the cluster by creating PV
+    
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: test2
+  labels:
+    type: amazonEBS
+spec:
+  capacity:
+    storage: 1Gi
+accessModes:
+  - ReadWriteOnce
+awsElasticBlockStore:
+  volumeID: vol-0b402cb854e070fad
+  fsType: ext4
+  
+step:-3 create a persistent volume claim
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: task-pv-claimr
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+      
+ step:- 4 attach pv to the pod
+ 
+apiVersion: v1
+metadata:
+name: test-ebs
+spec:
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: task-pv-claimr
+  containers:
+    - name: nginx
+      image: nginx
+      volumeMounts:
+         - mountPath: “/usr/share/nginx/html”
+           name: task-pv-storage
+    
+12. Update the password in secret without restarting the pod or deployment is it possible ?
+    no it is not possible, we have to restart the pod
+    
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: mypod
+    image: redis
+    volumeMounts:
+    - name: foo
+      mountPath: "/etc/foo"
+      readOnly: true
+  volumes:
+  - name: foo
+    secret:
+      secretName: mysecret
+      optional: false # default setting; "mysecret" must exist
+      
+13. what is the reason for pod eviction?
+    pod would not be tolerated
+    
+14. how you will make sure that in rolling update strategy 2 pods are always available?
+
+   RollingUpdate: New pods are added gradually, and old pods are terminated gradually
+   Recreate: All old pods are terminated before any new pods are added
+   
+   maxSurge: The number of pods that can be created above the desired amount of pods during an update
+   maxUnavailable: The number of pods that can be unavailable during the update process
+   
+   replicas: 3
+   strategy:
+       type: RollingUpdate
+       rollingUpdate:
+         maxSurge: 1
+         maxUnavailable: 0
+         
+  
+  why you are using 3 master node in production?
+   In a single master setup, the master node manages the etcd database, API server, controller manager and scheduler, along with the worker nodes. 
+   However, if that single master node fails, all the worker node fail as well and entire cluster will be lost. 
+   A multi-master setup protects against a wide range of failure modes, from a loss of single worker node to the failure of the master node’s etcd service. 
+   By providing redundancy, a multi-master cluster serves a highly available system for your end users.
+   
+ 15. how to check what are the activities performed by the container while creating the pod?
+     
+ 16. pod conditions?
+    PodScheduled: the Pod has been scheduled to a node.
+    ContainersReady: all containers in the Pod are ready.
+    Initialized: all init containers have completed successfully.
+    Ready: the Pod is able to serve requests and should be added to the load balancing pools of all matching Services.
+ 
+ 17. how to get the ip of a pod ?
+    kubectl get pod -o wide
+    
+ 18. which network plugin you are using?
+      calico network
+      
+  21. pod debugging?
+  
+  22. describe about ingress?
+  
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
       
     
     

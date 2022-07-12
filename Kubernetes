@@ -904,7 +904,35 @@ spec:
   23. kubectl log nginx -c <container name>  ==> to check the specific container logs in a pod.
   
   22. describe about ingress?
-            
+      
+      ingress controller :- 
+        - Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. 
+        - To process the ingress rules, we must deploy an ingress controller into our cluster, whenever we make any request ingress controller
+           inspect that http request direct that request to the correct pod based upon the ingress rules that we defined.
+        -  kubectl api-resources | grep <object or service name>  => to list the api versions
+       
+   <== YAML file for the ingress ==>
+   
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+spec:
+  tls:
+    - secretName: nginx-demo-com-tls
+      hosts:
+        - nginx-demo.com
+  rules:
+    - host: nginx-demo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-service
+                port:
+                  number: 8082
   
   
  

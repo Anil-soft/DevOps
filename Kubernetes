@@ -934,11 +934,41 @@ spec:
                 name: nginx-service
                 port:
                   number: 8082
-  
-  
+              
+23. how to pull image from private docker repo into kubernetes cluster?
+    - docker login -u <user-name> -p <password>
+    - cat ~/my_password.txt | docker login --username foo --password-stdin 
+    - To run the docker login command non-interactively, you can set the --password-stdin flag to provide a password through STDIN
+    - Using STDIN prevents the password from ending up in the shell’s history, or log-files.
+    - The login process creates or updates a config.json file that holds an authorization token.
+       cat ~/.docker/config.json
+    - A Kubernetes cluster uses the Secret of kubernetes.io/dockerconfigjson type to authenticate with a container registry to pull a private image.
+    - kubectl create secret generic regcred \
+    --from-file=.dockerconfigjson=<path/to/.docker/config.json> \
+    --type=kubernetes.io/dockerconfigjson
  
+    <== YAML file to create secrets ==>
+apiVersion: v1
+kind: Secret
+metadata:
+  name: myregistrykey
+  namespace: awesomeapps
+data:
+  .dockerconfigjson: UmVhbGx5IHJlYWxseSByZWVlZWVlZWVlZWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGx5eXl5eXl5eXl5eXl5eXl5eXl5eSBsbGxsbGxsbGxsbGxsbG9vb29vb29vb29vb29vb29vb29vb29vb29vb25ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubmdnZ2dnZ2dnZ2dnZ2dnZ2dnZ2cgYXV0aCBrZXlzCg==
+type: kubernetes.io/dockerconfigjson
  
- 
+
+<== pod manifest file that uses the secret ==>
+apiVersion: v1
+kind: Pod
+metadata:
+  name: private-reg
+spec:
+  containers:
+  - name: private-reg-container
+    image: <your-private-image>
+  imagePullSecrets:
+  - name: regcred
  
  
  

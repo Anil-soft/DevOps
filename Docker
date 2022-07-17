@@ -1,3 +1,22 @@
+what is docker?
+   Docker is an open platform for developing, shipping, and running applications. 
+   Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. 
+   Docker provides the ability to package and run an application in a loosely isolated environment called a container.
+   
+Docker Architecture
+   Docker uses a client-server architecture. The Docker client talks to the Docker daemon, which does the heavy lifting of building, 
+   running, and distributing your Docker containers. 
+Docker client
+   The Docker client (docker) is the primary way that many Docker users interact with Docker.
+    When you use commands such as docker run, the client sends these commands to dockerd, which carries them out.
+    The docker command uses the Docker API. 
+Docker daemon
+    The Docker daemon (dockerd) listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes.
+Docker Image
+   An image is a read-only template with instructions for creating a Docker container.
+Docker container
+   A container is a runnable instance of an image. You can create, start, stop, move, or delete a container using the Docker API or CLI.
+   
 -: docker pull centos   => to pull the image
 -: docker run -it --name <container-name> centos /bin/bash  => to create the container from centos image
 -: docker ps  => to list the active containers
@@ -6,6 +25,7 @@
 -: docker exec -it <container-id> /bin/bash  => to log in to the container
 -: docker commit <container-id> "<image-name>"  => to create the image form container
 -: docker build -f "<image-name>" .  => to create an image from dockerfile
+
 Dockerfile:-
 FROM centos
 RUN yum install telnet -y && useradd anil  => to run the command inside the container
@@ -25,9 +45,7 @@ The main purpose of the CMD command is to launch the software required in a cont
 -: RUN - When you use a RUN command in your dockerfile, it always creates a new intermediate image layer on top of the previous ones.
 -: CMD - A CMD command is used to set a default command that gets executed once you run the Docker Container.
          In case you provide a command with the Docker run command, the CMD arguments get ignored from the dockerfile.
-         In the case of multiple CMD commands, only the last one gets executed.
-
-   
+         In the case of multiple CMD commands, only the last one gets executed
 
 -: docker run mydockerfile:cmd /bin/bash /tmp/script1.sh
 -: docker run mydockerfile:entrypoint /bin/bash /tmp/script1.sh
@@ -59,6 +77,7 @@ The main purpose of the CMD command is to launch the software required in a cont
  -: docker network create --driver=bridge anil_network
  -: docker run -itd --name network1 --net  <network-name> centos /bin/bash  => to create the container with the specified network
  -: docker run -itd --name network1 --net  <network-name> --ip <ip-addr> centos /bin/bash  ==> to create the container with the specified IP\
+ -: docker network connect multi-host-network container1
  -: docker logs mycont1  => to check the container logs
  -: docker stats  => to check the memory and CPU utilization of container
  -: docker ps -q  => to list out the container id's
@@ -88,20 +107,14 @@ The main purpose of the CMD command is to launch the software required in a cont
  -: docker run -d -p 8080:80 --name httpd-container httpd  => mapping the port to the container, 8080 is the host machine and 80 is the container port,
       container port is used only to communicate internally
       
- -: 
-    
- 
- 
- 
-
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+ -: docker policies
+    no - Do not automatically restart the container. (the default)
+    on-failure - Restart the container if it exits due to an error, which manifests as a non-zero exit code. 
+                 optionally, limit the number of times the Docker daemon attempts to restart the container using the :max-retries option.
+    always - Always restart the container if it stops. If it is manually stopped, it is restarted only when Docker daemon restarts or 
+             the container itself is manually restarted. 
+    unless-stopped - Similar to always, except that when the container is stopped (manually or otherwise),
+                      it is not restarted even after Docker daemon restarts.
+                      
+ -: docker run -d --restart unless-stopped redis  => to update the restart policy on container
  

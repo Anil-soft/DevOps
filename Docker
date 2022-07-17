@@ -31,7 +31,7 @@ The main purpose of the CMD command is to launch the software required in a cont
 
 -: docker run mydockerfile:cmd /bin/bash /tmp/script1.sh
 -: docker run mydockerfile:entrypoint /bin/bash /tmp/script1.sh
-
+ 
 { docker volumes }
  - vgcreate myvg /dev/xvdf
  - lvcreate -L +4G -n mylv myvg
@@ -42,7 +42,14 @@ The main purpose of the CMD command is to launch the software required in a cont
  -: docker run -it --name <container-name> -v /mydocdata/:/myapp centos /bin/bash  => to attach volume to the container
  -: docker run -v data_volume:/var/lib/mysql mysql  => to mount the volume to the container (/var/lib/mysql default folder to mount the volume)
  -: docker run -v /data/mysql:/var/lib/mysql mysql  => ( bind mount will mount the directory )
+    - When you use a bind mount, a file or directory on the host machine is mounted into a container. 
+    - The file or directory is referenced by its absolute path on the host machine.
+    - By contrast, when you use a volume, a new directory is created within Docker’s storage directory on the host machine, 
+      and Docker manages that directory’s contents.
+    - The file or directory does not need to exist on the Docker host already. It is created on demand if it does not yet exist. 
+    
  -: docker run --mount type=bind,source=/data/mysql,target=/var/lib/mysql mysql
+ -: docker volume prune  => to remove all the volumes which are not attached to the containers
  -: man docker-run  => manual page to refer t--subnet=10.1.0.0/16 --ip-range=10.1.4.0/24 --gateway=10.1.0.1 anil-network  => to create the network
  { docker network type }
  -  bridge

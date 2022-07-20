@@ -524,11 +524,51 @@ Cultural benefits
   
 what is edge computing, can you give me one example?
   
+Cloud computing deployment models?
+Cloud:- 
+  A cloud based application is fully deployed in the cloud and all parts of the application run in the cloud.
+Hybrid:- 
+  A hybrid deployment is way to connect infrastructure and application between cloud based resources and existing resources
+  that are not located in the cloud.
+On-premises:- 
+  Deploying resources on-premises, using virtualization and resource management tool, is sometimes called "private cloud"
+  
+what is shared responsibility model ?
+AWS responsibility Security of the Cloud:-
+  AWS is responsible for protecting the infrastructure that runs all of the services offered in the AWS Cloud. 
+  This infrastructure is composed of the hardware, software, networking, and facilities that run AWS Cloud services.
+Customer responsibility Security in the Cloud:-
+  Customer responsibility will be determined by the AWS Cloud services that a customer selects.
+  This determines the amount of configuration work the customer must perform as part of their security responsibilities.
+  For example, a service such as Amazon Elastic Compute Cloud (Amazon EC2) is categorized as Infrastructure as a Service (IaaS) and, 
+  as such, requires the customer to perform all of the necessary security configuration and management tasks.
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
-
-
-
-
 
 
 

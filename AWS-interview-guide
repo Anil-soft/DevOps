@@ -492,6 +492,46 @@ How to distribute application load in different region?
   properties - enable static website hosting - give the index.html file
   permissions - enable the public access
 
+what is the difference between vertical and horizonal scaling?
+  RDS and EC2
+Vertical Scaling :- 
+  - Vertical scaling is the most straightforward approach to adding more capacity in your database.
+  - Vertical scaling is suitable if you can’t change your application and database connectivity configuration.
+  
+Horizontal Scaling:
+  - Horizontal scaling increases performance by extending the database operations to additional nodes. 
+  - You can choose this option if you need to scale beyond the capacity of a single DB instance.
+  - To scale your read operations, you horizontally scale your database through read replicas.
+  - When you create a read replica, Amazon RDS creates read-only copies of your database and manages the asynchronous replication from the primary database. 
+  
+what are the advantages of cloud computing?
+  - Instead of having to invest heavily in data centers and servers before you know how you’re going to use them, 
+    you can pay only when you consume computing resources, and pay only for how much you consume.
+  - Increase speed and agility – In a cloud computing environment, new IT resources are only a click away, 
+    which means that you reduce the time to make those resources available to your developers from weeks to just minutes.
+  - Easily deploy your application in multiple regions around the world with just a few clicks. 
+    This means you can provide lower latency and a better experience for your customers at minimal cost.
+
+what are the advantages of DevOps?
+technical benefits
+  faster software delivery
+  faster problem remediation
+  more time to innovate rather than fix or maintain
+  
+Cultural benefits
+  improved communication and collaboration
+  greater professional opportunities
+  
+what is edge computing, can you give me one example?
+  
+    
+
+
+
+
+
+
+
 
 
 

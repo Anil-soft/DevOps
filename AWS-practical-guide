@@ -1,3 +1,5 @@
 IAM
   :- groups can have multiple users but not multiple groups
-  :  
+  :- policies are permissions that assign to users & groups.
+  :- Some AWS services will perform some actions on behalf of you, to do so, we will assign permissions to services with IAM roles
+  :- 

@@ -87,7 +87,7 @@
   file:
   path: /etc/anil_dir
   state: directory
-  mode: '0755'
+  mode: '0755
   
 * copy module
   

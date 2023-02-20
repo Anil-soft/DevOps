@@ -4,7 +4,8 @@
   - ssh-agent bash
   - cp ec2-key.pem ~/.ssh/
     - ssh-add ~/.ssh/ec2-key.pem 
-  - create the inventory file and add the ips
+  - create the inventory file and add the private ips
+  - default location /etc/ansible/hosts
   
  :- Ansible works on client only model which means no need to have master server
  

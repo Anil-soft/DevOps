@@ -18,7 +18,7 @@
  
  Note:- ansible.cfg file the important file in ansible which is having all the information like inventory, interpreter, private key file, privilege escalation
  
- Idempotency:- if the configuration is already existed then i will skip or else it will execute the configation
+ Idempotency:- if the configuration is already existed then it will skip or else it will execute the configation
   ---
 - hosts: webservers
   become: True

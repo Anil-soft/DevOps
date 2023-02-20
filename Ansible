@@ -194,6 +194,7 @@
   - ansible-vault create mydbpass.yaml  => to create the new file with ansible vault
   - ansible-vault encrypt mydbpass.yaml  => to encrypt the existing file
   - ansible-vault edit mydbpass.yaml  => to edit the information
+  - ansible-vault rekey mydbpass.yaml  => to change ansible-vault password
   - ansible-vault view mydbpass.yaml 
   - ansible-playbook --ask-vault-pass myvault.yaml  => it asks us to give the password to decrypt the secret
   - ansible-playbook --vault-password-file=mypassword myvault.yaml

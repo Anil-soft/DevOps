@@ -60,6 +60,7 @@ The main purpose of the CMD command is to launch the software required in a cont
  -: docker run -it --name <container-name> -v /mydocdata/:/myapp centos /bin/bash  => to attach volume to the container
  -: docker run -v data_volume:/var/lib/mysql mysql  => to mount the volume to the container (/var/lib/mysql default folder to mount the volume)
  -: docker run -v /data/mysql:/var/lib/mysql mysql  => ( bind mount will mount the directory )
+ -: docker volume rm myvol  => ( to remove volume )
     - When you use a bind mount, a file or directory on the host machine is mounted into a container. 
     - The file or directory is referenced by its absolute path on the host machine.
     - By contrast, when you use a volume, a new directory is created within Docker’s storage directory on the host machine, 
@@ -117,4 +118,79 @@ The main purpose of the CMD command is to launch the software required in a cont
                       it is not restarted even after Docker daemon restarts.
                       
  -: docker run -d --restart unless-stopped redis  => to update the restart policy on container
+ 
+ Docker interview questions:-
+  
+ what is the difference between Dockerfile add docker compose file?
+   Dockerfile:- A Dockerfile is the simple text file that contains the command a user could call to assemble an image.
+   Docker compose file:- Docker compose is a tool is used to run multiple containers as a single service.
+      - For example, suppose you had an application which required NGNIX and MySQL, you could create one file
+      - which would start both the containers as a service without the need to start each one separately.
+      
+ How do we run NGINX webserver on localhost:8088 using a bridge network?
+   - Bridge network is the default network on docker
+   - $ docker run -it -d -p 8088:80 --name web_server nginx
+   
+ Explain how to make contaier volume persist and how do we mount the volume on the localhost "/root/nginx" directory? not in th default directory "/var/lib/volumes"
+   - $ docker run --mount type=bind,source=/root/nginx, target=/var/lib/mysql mysql
+   
+ How to check details about any image?
+   - $ docker inspect <imagename/imageid>
+   
+ How to check details about each layer in a docker image like size, task done, timestamp?
+  - $ docker history <imageid> 
+  
+ How to run container interactive mode and daemon mode?
+   $ docker run -itd --name test1 alpine
+   
+ How to check details about a container ?
+  $ docker inspect <containername/id>
+  
+How to check logs of a containner ?
+  $ docker logs <container/id> 
+  
+How to create the own registry in docker ?
+ $ docker run -d -p 5000:5000 --name registry registry:2
+ $ docker pull ubuntu
+ $ docker image tag ubuntu localhost:5000/myfirstimage
+ $ docker push localhost:5000/myfirstimage
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  

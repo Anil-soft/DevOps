@@ -156,10 +156,17 @@ How to create the own registry in docker ?
  $ docker image tag ubuntu localhost:5000/myfirstimage
  $ docker push localhost:5000/myfirstimage
    
- 
- 
- 
- 
+What are the reasons if container is getting killed or terminated ?
+   - You run a container, which runs a shell script to perform some tasks. When the shell script completes, 
+     the container will exit, because there’s nothing left for the container to run.
+     
+   - You’re running a shell in a container, but you haven’t assigned a terminal, If you’re running a container with a shell (like bash) as the default command, 
+   - hen the container will exit immediately if you haven’t attached an interactive terminal. 
+   -  You can stop this by adding --interactive --tty (or just -it) to your docker run ... command, which will let you type commands into the shell.
+   
+   - The important line there is "OOMKilled" which will be true if you exceed the container memory limits and Docker kills your app.
+   - This only indicates if docker itself kills your process, and requires that you have set a memory limit on your container. 
+   - Outside of docker, the Linux kernel can kill your process if the host itself runs out of memory.
  
  
  

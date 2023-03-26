@@ -973,13 +973,33 @@ spec:
  How do you secure kubernetes app?
   - 
  
+ How to scale your kubernetes application ?
+   - The HorizontalPodAutoscaler is implemented as a Kubernetes API resource and a controller.
+   - The resource determines the behavior of the controller. 
+   - The horizontal pod autoscaling controller, running within the Kubernetes control plane, periodically adjusts the desired scale of its target
+     (for example, a Deployment) to match observed metrics such as average CPU utilization, average memory utilization, or any other custom metric you specify.
+   - HorizontalPodAutoscaler controls the scale of a Deployment and its ReplicaSet
+   
+   $ kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
  
- 
- 
- 
- 
- 
- 
+ apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: php-apache
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: php-apache
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
  
  
  

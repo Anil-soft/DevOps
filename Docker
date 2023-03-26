@@ -26,6 +26,7 @@ Docker container
 -: docker commit <container-id> "<image-name>"  => to create the image form container
 -: docker build -f "<image-name>" .  => to create an image from dockerfile
 
+
 Dockerfile:-
 FROM centos
 RUN yum install telnet -y && useradd anil  => to run the command inside the container

@@ -970,7 +970,8 @@ spec:
   imagePullSecrets:
   - name: regcred
  
- 
+ How do you secure kubernetes app?
+  - 
  
  
  

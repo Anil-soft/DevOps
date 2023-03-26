@@ -105,6 +105,9 @@ The main purpose of the CMD command is to launch the software required in a cont
     - first need to tag the image before push into the repo
     -: docker tag centos:7 anil3078/centos:7
     -  docker push <image-name> 
+ -  Tag an image for a private repository
+    - To push an image to a private registry and not the central Docker registry you must tag it with the registry hostname and port (if needed).
+    $ docker tag 0e5574283393 myregistryhost:5000/fedora/httpd:version1.0
  
  -: docker run -d -p 8080:80 --name httpd-container httpd  => mapping the port to the container, 8080 is the host machine and 80 is the container port,
       container port is used only to communicate internally
@@ -168,8 +171,16 @@ What are the reasons if container is getting killed or terminated ?
    - This only indicates if docker itself kills your process, and requires that you have set a memory limit on your container. 
    - Outside of docker, the Linux kernel can kill your process if the host itself runs out of memory.
  
- 
- 
+ How to check th container logs ?
+   - sudo docker container logs [option] container_id
+   
+ How to update the docker container ?
+   - docker update --cpu-shares 512 -m 300M abebf7571666 
+   - docker update --restart=on-failure:3 abebf7571666
+   
+ How to updated docker container with new image ?
+   - pull the latest image and launch container out of it and removed existing container
+   
  
  
  

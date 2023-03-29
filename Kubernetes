@@ -316,6 +316,8 @@ spec:
 <== Node Affinity ==>
  - Node affinity is conceptually similar to nodeSelector.
  - allowing you to constrain which nodes your Pod can be scheduled on based on node labels.
+ - requiredDuringSchedulingIgnoredDuringExecution 
+ - preferredDuringSchedulingIgnoredDuringExecution 
  
  <== commands ==>
   - kubectl label nodes node01 key=value

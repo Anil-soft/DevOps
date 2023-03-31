@@ -85,6 +85,13 @@ The main purpose of the CMD command is to launch the software required in a cont
  -: docker ps -q  => to list out the container id's
  -: docker rm -f <container-name>  => to remove container
  -: docker rm -f$(docker ps -q)  => to delete all the containers
+ -: docker network connect	=> Connect a container to a network
+ -: docker network create	=> Create a network
+ -: docker network disconnect	=> Disconnect a container from a network
+ -: docker network inspect	=> Display detailed information on one or more networks
+ -: docker network ls	=> List networks
+ -: docker network prune => Remove all unused networks
+ -: docker network rm	=> Remove one or more networks
  
  <== script to delete the docker images ==>
  for image in $(docker images|grep -v -e "centos\|REPOSITORY"|awk '{print $3}')

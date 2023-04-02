@@ -553,7 +553,7 @@ spec:
             name: prod
     ports:
     - protocol: TCP
-      port: 6379
+      port: 6379x
          
 * PersistentVolume and PersistentVolumeClaim
   - A PersistentVolume (PV) is a piece of storage in the cluster that has been provisioned by an administrator or dynamically provisioned using Storage Classes.
@@ -565,6 +565,7 @@ spec:
   - PVC removal is postponed until the PVC is no longer actively used by any Pods. 
   - Also, if an admin deletes a PV that is bound to a PVC, the PV is not removed immediately.
   - PV removal is postponed until the PV is no longer bound to a PVC.
+  - storage class and PV is available by cluster and PVC is only available on that namespace.
   
   * YAML file for persistentvolume
   apiVersion: v1

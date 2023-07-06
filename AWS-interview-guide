@@ -1,3 +1,5 @@
+export PS1='$ '
+
 <== IAM ==>
   :- IAM = Identity and Access Management, Global service
   :- Users are people within your organization, and can be grouped

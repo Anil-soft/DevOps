@@ -207,3 +207,23 @@ What are the reasons if container is getting killed or terminated ?
    
  How to updated docker container with new image ?
    - pull the latest image and launch container out of it and removed existing container
+
+How to copy files from host to Docker container?
+   $ docker cp /opt/file.txt <containerid>:/usr/file.txt
+
+How to copy image from one host to another host?
+   $ docker save -o myimage.tar alpine
+   $ scp myimage.tar user@localhost:~/
+   - login to remote host and load the image
+   $ docker load -i myimage.tar 
+
+
+
+
+
+
+
+
+
+
+

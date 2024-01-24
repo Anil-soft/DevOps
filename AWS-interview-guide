@@ -563,6 +563,40 @@ Customer responsibility Security in the Cloud:-
 cloud computing models?
 IaaS:-
   
+How can you manage state in an AWS Lambda function?
+  AWS lambda functions are designed to be stateless, you can manage state externally using services like dynamodb, RDS and
+  other AWS storage solutions.
+
+How does lambda handle concurrency?
+  Lambda automatically scales horizontally to handle incoming requests, each function execution is independent and lambda can run
+  multiple instaces of a function confurrently to handle increased load.
+
+What is the cold start issue in AWS Lambda? How it can be mitigated?
+  Cold starts in AWS Lambda refer to the latency experienced when a new instance of a function is created
+  Schedule periodic invocations of your Lambda function to keep it "warm." By doing this, you ensure that there 
+  is always at least one instance of your function running
+  AWS Lambda provides a feature called "Provisioned Concurrency" that allows you to pre-warm your function by specifying 
+  the number of instances you want to keep warm. 
+
+How can you increase the CPU percentage of lambda function?
+ In AWS Lambda, you don't have direct control over the specific CPU size or type of the underlying infrastructure.
+ The amount of CPU power allocated to a Lambda function is directly proportional to the amount of memory you allocate.
+ When you configure the memory for your Lambda function, AWS also allocates an equivalent amount of CPU power and other resources
+
+How do you secure your lambda function?
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

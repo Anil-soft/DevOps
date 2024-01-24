@@ -902,8 +902,8 @@ spec:
   21. pod debugging?
       ImagePullbackOff:- unable to pull the image, because image is not available on DockeHub if the image is in private repository we should log in to DockerHub
       crashloopbackoff:- there is no processor or application is running inside the container, so that starts and keep running always because of restart policy
-                         sometimes we may have pod which needs to just come up do it's jon and shutdown, in such cased need to mention restrtpolicy:Never
-      pod in pending state:- make sure that mentioned nodeselector lable at lease one lable shoul be labeled in cluster
+                         sometimes we may have pod which needs to just come up do it's job and shutdown, in such cases need to mention restartpolicy:Never
+      pod in pending state:- make sure that mentioned nodeselector lable at leaset one lable should be labeled in cluster
   
   23. kubectl log nginx -c <container name>  ==> to check the specific container logs in a pod.
   

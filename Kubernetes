@@ -1003,3 +1003,58 @@ spec:
       target:
         type: Utilization
         averageUtilization: 50
+
+Recently created nginx pod status is pending, find out why?
+ run the command kubectl describe pod pod_name
+ pod is not tolerated
+
+previously created nginx web server deployed successfully, but the web page is not accessible, find out why?
+  first we need to troubleshoot the issue
+  kubectl describe pod pod_name
+  kubectl logs pod_name
+  check web server configuration by "kubectl exec" command
+  whether the port is exposed correctly or not
+
+Need to provision Big data app pods on Big data nodes only, and no other application pods should be deployed on Big data nodes,
+how do we achieve it?
+  node affinity, node selector, taint and tolerations.
+
+what are sidecar containers and their purpose?
+  sidecar containers are like composite containers network proxies, log collection
+
+There are two containers running inside a pod and i want to debug specific container logs, how can i do that?
+   kubectl log -f pod_name  -> get the pod logs
+   kubectl log -f pod_name container_name  -> have to specify the container name
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
